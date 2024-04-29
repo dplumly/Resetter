@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "Resetter",
+  "description": "Timeout function with modal",
+  "version": "1.0",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "<all_urls>"
+    ],
+      "css": ["main.css"],
+      "js": ["content.js"] 
+    }
+  ],
+  "icons": {
+    "48": "Resetter-Logo.png"
+  },
+  "action": {
+    "default_popup": "popup.html"
+    },
+    "permissions": [
+      "activeTab"
+    ]
+}

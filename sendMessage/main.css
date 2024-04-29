@@ -1,0 +1,162 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/*==============================================
+Reload button styles
+==============================================*/
+#reload {
+  position: fixed;
+  height: 150px;
+  width: 150px;
+  background-color: none;
+}
+
+
+#reload.hiddenResetButtonVisualCheck {
+  background-color: red ;
+}
+
+
+#popUpContainer {
+  height: 300px;
+  width: 350px;
+  margin: 0 auto;
+  padding: 15px 30px;
+}
+
+#extensionName {
+  padding: 10px 0;
+}
+
+#inputStatus  {
+  margin: 10px 0;
+  font-size: 20px;
+  font-weight: 400;
+  font-family: Helvetica, Arial, Sans-Serif;
+}
+
+#saveButton, #removeButton, #hiddenResetButtonSizeCheck {
+  padding: 5px 10px;
+  margin: 5px 5px 5px 0;
+  cursor: pointer;
+}
+
+#userInputField {
+  padding: 5px 10px;
+  margin: 5px 5px 5px 0;
+}
+
+
+
+
+
+/* #hiddenResetButtonPostitioning input.hiddenResetButtonTopLeft {
+  top: 0;
+  left: 0;
+  cursor: pointer;
+} */
+
+#hiddenResetButtonPostitioning input {
+  margin: 20px, auto;
+  cursor: pointer;
+}
+
+
+/* #hiddenResetButtonPostitioning {
+  margin: 20px, auto;
+} */
+
+
+.hiddenResetButtonTopLeft {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
+.hiddenResetButtonTopRight {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+
+.hiddenResetButtonBottomLeft {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+
+.hiddenResetButtonBottomRight {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+
+
+
+
+
+.fadeInModal {
+  animation: fadeInModal 1s;
+  -webkit-animation: fadeInModal 1s;
+  -moz-animation: fadeInModal 1s;
+  -o-animation: fadeInModal 1s;
+  -ms-animation: fadeInModal 1s;
+}
+
+@keyframes fadeInModal {
+  0% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeInModal {
+  0% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeInModal {
+  0% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 1;
+  }
+}
+
+@-o-keyframes fadeInModal {
+  0% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 1;
+  }
+}
+
+@-ms-keyframes fadeInModal {
+  0% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 1;
+  }
+}
