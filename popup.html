@@ -1,0 +1,43 @@
+
+<html>
+    <head>
+        <link rel='stylesheet' type='text/css' href='main.css'>
+    </head>
+<body>
+	
+
+<div id="popUpContainer">
+    <h1 id="extensionName">Resetter</h1>
+
+    <input type="text" id="userInputField" placeholder="Enter Reset URL">
+    <button id="saveButton">Save</button>
+    <button id="removeButton">Remove</button>
+
+    <p id="inputStatus"></p>
+    <p>Stored Homepage: <span id="storedHomepage"></span></p>
+
+
+
+    <div id="hiddenResetButtonContainer">
+        <button id="hiddenResetButtonSizeCheck">Hidden Reset Button</button>
+
+        <div id="hiddenResetButtonPostitioning">
+            <input type="radio" id="topLeft" name="selectHiddenButtonPositioning" value="topLeft">
+            <label for="topLeft">Top Left</label><br>
+
+            <input type="radio" id="topRight" name="selectHiddenButtonPositioning" value="topRight" checked>
+            <label for="topRight">Top Right</label><br>
+
+            <input type="radio" id="bottomLeft" name="selectHiddenButtonPositioning" value="bottomLeft">
+            <label for="bottomLeft">Bottom Left</label><br>
+
+            <input type="radio" id="bottomRight" name="selectHiddenButtonPositioning" value="bottomRight">
+            <label for="bottomRight">Bottom Right</label><br>
+        </div>
+    </div>
+
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>

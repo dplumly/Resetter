@@ -1,0 +1,234 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ 
+/*==============================================
+Fonts
+==============================================*/
+/* IBM Plex Sans */
+/* @font-face {
+  font-family: 'IBM Plex Sans';
+  src: url('../fonts/IBM-Plex-Sans/IBMPlexSans-Regular.ttf') format('ttf'),
+      url('../fonts/IBM-Plex-Sans/IBMPlexSans-Regular-V01.1.otf') format('otf')
+} */
+
+/*==============================================
+Main Styles
+==============================================*/
+/* #container {
+  width: 100%;
+  height: 100vh;
+  background: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+#popUpContainer {
+  height: 350px;
+  width: 350px;
+  margin: 0 auto;
+  padding: 15px 30px;
+}
+
+#extensionName {
+  padding: 10px 0;
+}
+
+#inputStatus  {
+  margin: 10px 0;
+  font-size: 20px;
+  font-weight: 400;
+  font-family: Helvetica, Arial, Sans-Serif;
+}
+
+#saveButton, #removeButton, #hiddenResetButtonSizeCheck {
+  padding: 5px 10px;
+  margin: 5px 5px 5px 0;
+  cursor: pointer;
+}
+
+#userInputField {
+  padding: 5px 10px;
+  margin: 5px 5px 5px 0;
+}
+
+#hiddenResetButtonPostitioning {
+  margin-top: 15px;
+}
+
+/*==============================================
+Reload button styles
+==============================================*/
+#reload {
+  height: 150px;
+  width: 150px;
+  background-color: none;
+}
+
+#reload.hiddenResetButtonVisualCheck {
+  background-color: red ;
+}
+
+#hiddenResetButtonPostitioning input {
+  margin: 20px, auto;
+  cursor: pointer;
+}
+
+.hiddenResetButtonTopLeft {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.hiddenResetButtonTopRight {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.hiddenResetButtonBottomLeft {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.hiddenResetButtonBottomRight {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+/*==============================================
+Modal
+==============================================*/
+#timerWrapper {
+  position: fixed;
+  top: 50%;  
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  height: 325px;
+  width: 450px;
+  border-radius: 25px;
+  background: #ffffff;
+  z-index: 10;
+  display: none;
+  transition: all ease 1s;
+}
+
+#headerCopy {
+  margin: 30px auto 0 auto;
+  display: table;
+  font-size: 34px;
+  font-weight: 400;
+  font-family: Helvetica, Arial, Sans-Serif;
+  /* font-family: 'IBM Plex Sans', sans-serif; */
+  color: #161616;
+  z-index: 11;
+}
+
+#timer {
+  position: fixed;
+  top: 50%;  
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  display: none;
+  margin: 0 auto;
+  text-align: center;
+  font-family: Helvetica, Arial, Sans-Serif;
+  /* font-family: 'IBM Plex Sans', sans-serif; */
+  font-size: 150px;
+  z-index: 11;
+}
+
+#continue {
+  position: absolute;
+  width: 150px;
+  color: #fff;
+  background: #0f62fe;
+  border: none;
+  display: none;
+  font-size: 20px;
+  font-weight: 400;
+  font-family: Helvetica, Arial, Sans-Serif;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  right: 90px;
+  bottom: 30px;
+  border-radius: 25px;
+  z-index: 11;
+}
+
+#modalBackground {
+  display: none;
+  height: 100%;
+  width: 100%;
+  background: #000;
+  opacity: .7;
+  z-index: 9;
+   position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.fadeInModal {
+  animation: fadeInModal 1s;
+  -webkit-animation: fadeInModal 1s;
+  -moz-animation: fadeInModal 1s;
+  -o-animation: fadeInModal 1s;
+  -ms-animation: fadeInModal 1s;
+}
+
+@keyframes fadeInModal {
+  0% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeInModal {
+  0% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeInModal {
+  0% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 1;
+  }
+}
+
+@-o-keyframes fadeInModal {
+  0% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 1;
+  }
+}
+
+@-ms-keyframes fadeInModal {
+  0% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 1;
+  }
+}
