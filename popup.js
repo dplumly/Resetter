@@ -1,143 +1,109 @@
  ////////////////////////////////////////////////////////////////////////////
 // Send message to content.js - https://stackoverflow.com/questions/29926598/sendmessage-from-popup-to-content-js-not-working-in-chrome-extension
+console.log('popup.js loaded');
 
+// Save Data to Storage:
+document.getElementById('saveButton').addEventListener('click', () => {
+    let userInput = document.getElementById('userInputField').value.trim();
 
+    console.log('button saved clicked');
 
-
-// (async () => {
-//     const [tab] = await chrome.tabs.query({active: true, lastFocusedWindow: true});
-//     const response = await chrome.tabs.sendMessage(tab.id, {greeting: "hello"});
-//     // do something with response here, not outside the function
-//     console.log(response);
-//   })();
-
-
-
-
-
-
-
- // Retrieve stored input from localStorage (if any)
- document.getElementById('storedHomepage').textContent = localStorage.getItem('userInput') || 'No input stored';
-
- let userInput;
-
- document.getElementById('removeButton').addEventListener('click', () => {
-    localStorage.removeItem('userInput');
-    document.getElementById('inputStatus').textContent = 'Input removed';
-    document.getElementById('storedHomepage').textContent = '';
-    userInput = null;
-    localStorage.clear();
-    document.getElementById('userInputField').value = '';
-
-    console.log('removed function');
-});
-
-
- document.getElementById('saveButton').addEventListener('click', () => {
-    userInput = document.getElementById('userInputField').value;
-
-    localStorage.setItem('userInput', userInput);
-    document.getElementById('storedHomepage').textContent = userInput;
-
-    console.log(userInput);
-
-      if (userInput.trim() !== '') {
-        localStorage.setItem('userInput', userInput);
-        
-        document.getElementById('storedHomepage').textContent = userInput;
-        document.getElementById('inputStatus').textContent = 'Input saved successfully.';
-
+    if (userInput !== '') {
+        chrome.storage.local.set({ 'userInput': userInput }, () => {
+            console.log('Input saved successfully ' + userInput);
+            document.getElementById('storedHomepage').textContent = userInput;
+            document.getElementById('inputStatus').textContent = 'Input saved successfully.';
+        });
     } else {
         document.getElementById('inputStatus').textContent = 'Please enter some input.';
-        window.location.reload(true);
     }
 });
 
 
-////////////////////////////////////////////////////////////////////////////
+// Remove Data from Storage:
+document.getElementById('removeButton').addEventListener('click', () => {
+    console.log('button removed clicked');
 
-// //Hidden Reload Button Visability
-const selectHiddenButton = document.getElementById('hiddenResetButtonSizeCheck');
-selectHiddenButton.addEventListener('click', () => {
-    const makeVisable = document.getElementById('reload');
-    makeVisable.classList.toggle('hiddenResetButtonVisualCheck');
-    console.log('Reveal!');
-});
-
-
-// Hidden reload button
-const hiddenResetButton = document.createElement("div");
-hiddenResetButton.setAttribute("id", "reload");
-document.body.append(hiddenResetButton); 
-
-
-// Reload page when clicked
-document.getElementById('reload')
-.addEventListener('click', () => {
-    window.location.reload(true);
-});
-
-
-////////////////////////////////////////////////////////////////////////////
-
-// Save radio button state to local storage
-const reloadButton = document.getElementById("reload");
-const radioButtons = document.querySelectorAll('input[name="selectHiddenButtonPositioning"]');
-
-// Function to save the selected radio button state and button position to local storage
-function saveSettings() {
-    let selectedPosition = document.querySelector('input[name="selectHiddenButtonPositioning"]:checked');
-    if (selectedPosition) {
-        localStorage.setItem('selectedPosition', selectedPosition.value);
-        localStorage.setItem('buttonPosition', reloadButton.className);
-    }
-}
-
-// Function to load the selected radio button state and button position from local storage
-function loadSettings() {
-    let selectedPosition = localStorage.getItem('selectedPosition');
-    let buttonPosition = localStorage.getItem('buttonPosition');
-    if (selectedPosition) {
-        document.getElementById(selectedPosition).checked = true;
-        reloadButton.className = buttonPosition;
-        updateButtonStyle(selectedPosition);
-        console.log("Selected position: " + selectedPosition);
-        console.log("Button position: " + buttonPosition);
-    }
-}
-
-// Function to update button style based on selected position
-function updateButtonStyle(selectedPosition) {
-    reloadButton.classList.remove("hiddenResetButtonTopLeft", "hiddenResetButtonBottomLeft", "hiddenResetButtonBottomRight", "hiddenResetButtonTopRight");
-    switch (selectedPosition) {
-        case 'topLeft':
-            reloadButton.classList.add("hiddenResetButtonTopLeft");
-            console.log('top left popup');
-            break;
-        case 'bottomLeft':
-            reloadButton.classList.add("hiddenResetButtonBottomLeft");
-            console.log('bottom left popup');
-            break;
-        case 'bottomRight':
-            reloadButton.classList.add("hiddenResetButtonBottomRight");
-            console.log('bottom right popup');
-            break;
-        case 'topRight':
-            reloadButton.classList.add("hiddenResetButtonTopRight");
-            console.log('top right popup');
-    }
-}
-
-// Add event listeners to radio buttons
-radioButtons.forEach(function(radio) {
-    radio.addEventListener('change', function() {
-        saveSettings();
-        updateButtonStyle(this.value);
+    chrome.storage.local.remove('userInput', () => {
+        console.log('Input removed successfully');
+        document.getElementById('inputStatus').textContent = 'Input removed';
+        document.getElementById('storedHomepage').textContent = '';
+        document.getElementById('userInputField').value = '';
     });
 });
 
-// Load selected position and button position when the page loads
-window.addEventListener('load', function() {
-    loadSettings();
+// Retrieve Data from Storage (optional, to display stored data when the extension is loaded):
+// This code should be placed inside a function that runs when the extension popup is opened or when needed.
+chrome.storage.local.get('userInput', (result) => {
+    let userInput = result.userInput;
+    if (userInput) {
+        document.getElementById('storedHomepage').textContent = userInput;
+    } else {
+        document.getElementById('inputStatus').textContent = 'No input stored';
+    }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// document.getElementById('saveButton').addEventListener('click', () => {
+//     userInput = document.getElementById('userInputField').value.trim();
+
+//     if (userInput !== '') {
+//         localStorage.setItem('userInput', userInput);
+//         document.getElementById('storedHomepage').textContent = userInput;
+//         document.getElementById('inputStatus').textContent = 'Input saved successfully.';
+
+//         console.log(userInput);
+//         // Remove the user input
+//         document.getElementById('removeButton').addEventListener('click', () => {
+//                 localStorage.removeItem('userInput');
+//                 document.getElementById('inputStatus').textContent = 'Input removed';
+//                 document.getElementById('storedHomepage').textContent = '';
+//                 userInput = null;
+//                 localStorage.clear();
+//                 document.getElementById('userInputField').value = '';
+//                 console.log('removed function');
+//             });
+//     }
+// });
+
+// document.getElementById('saveButton').addEventListener('click', () => {
+//     userInput = document.getElementById('userInputField').value.trim();
+
+//     if (userInput !== '') {
+//         localStorage.setItem('userInput', userInput);
+//         document.getElementById('storedHomepage').textContent = userInput;
+//         document.getElementById('inputStatus').textContent = 'Input saved successfully.';
+
+//         console.log(userInput);
+//         // Remove the user input
+//         document.getElementById('removeButton').addEventListener('click', () => {
+//                 localStorage.removeItem('userInput');
+//                 document.getElementById('inputStatus').textContent = 'Input removed';
+//                 document.getElementById('storedHomepage').textContent = '';
+//                 userInput = null;
+//                 localStorage.clear();
+//                 document.getElementById('userInputField').value = '';
+//                 console.log('removed function');
+//             });
+//     }
+// });
+
+
+
+
+
+
+

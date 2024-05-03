@@ -19,8 +19,9 @@
   "action": {
     "default_popup": "popup.html"
     },
-  "permissions": [
-    "tabs",
-    "activaTab"
-]
+    "permissions": [
+      "tabs",
+      "activeTab",
+      "storage"
+  ]
 }

@@ -1,19 +1,5 @@
-
-
 console.log("Content script loaded");
 
-
-
-
-// chrome.runtime.onMessage.addListener(
-//     function(request, sender, sendResponse) {
-//       console.log(sender.tab ?
-//                   "from a content script:" + sender.tab.url :
-//                   "from the extension");
-//       if (request.greeting === "hello")
-//         sendResponse({farewell: "goodbye"});
-//     }
-//   );
 
 
 
@@ -21,15 +7,15 @@ console.log("Content script loaded");
 ////////////////////////////////////////////////////////////////////////////
 
 // // Hidden reload button
-// const hiddenResetButton = document.createElement("div");
-// hiddenResetButton.setAttribute("id", "reload");
-// document.body.append(hiddenResetButton); 
+const hiddenResetButton = document.createElement("div");
+hiddenResetButton.setAttribute("id", "reload");
+document.body.append(hiddenResetButton); 
 
 
-// document.getElementById('reload')
-// .addEventListener('click', () => {
-//     window.location.reload(true);
-// });
+document.getElementById('reload')
+.addEventListener('click', () => {
+    window.location.reload(true);
+});
 
 
 
@@ -105,6 +91,21 @@ function resetTimer() {
 }
 
 
+// Function to reload the page based on user input
+function reloadPage() {
+    let userInput = localStorage.getItem('userInput');
+    if (userInput) {
+        if (userInput.trim() !== '') {
+            window.location.assign(userInput); // Reload to the specified userInput page
+        } else {
+            window.location.reload(true); // Reload the current page
+        }
+    } else {
+        window.location.reload(true); // Reload the current page if no userInput is stored
+    }
+}
+
+
 // modal pop up and will reset the page if no activity
 function goInactive() {
      document.body
@@ -128,21 +129,59 @@ function goInactive() {
         timer.innerHTML = String(timeLeft);
         timeLeft--;
 
+        // Inside the goInactive function
+        if (timeLeft === 0) {
+            clearInterval(intervalId);
+            clearTimeout(timeoutID);
+            reloadPage(); // Call the function to reload the page based on user input
+        }
 
+    }, 1000);
+    timeLeft = 35;
+}
 
+// modal pop up and will reset the page if no activity
+function goInactive() {
+     document.body
+        .appendChild(timeoutModal)
+        .appendChild(copy)
+        .appendChild(continueButton);
+
+        document.body.appendChild(timer);
+        document.body.appendChild(modalBackground);
+        timeoutModal.classList.add('fadeInModal'); 
+    
+    intervalId = setInterval(() => {   
+        console.log("goInactive function");
+
+        // Display the elements
+        timeoutModal.style.display = 'block';
+        timer.style.display = 'table';
+        continueButton.style.display = 'block';
+        modalBackground.style.display = 'block';
+
+        timer.innerHTML = String(timeLeft);
+        timeLeft--;
 
         if (timeLeft === 0) {
-            window.location.reload(true);
-            // if (isHomepageSet == true) 
-            // {
-            //     window.location.assign(userInput,);
-            // }
-            // else
-            // {
-            //     window.location.reload(true);
-            // }
+            chrome.storage.local.get(["userInput"], (result) => {
+                let userInput = result.userInput;
+                console.log("User input is " + userInput);
+        
+                if (userInput) {
+                    if (userInput.trim() !== '') {
+                        window.location.assign(userInput); // Redirect to the specified URL
+                    } else {
+                        window.location.reload(true); // Reload the current page
+                    }
+                } else {
+                    window.location.reload(true); // Reload the current page if no userInput is stored
+                }
+            });
         }
+        
     }, 1000);
 
     timeLeft = 35;
 }
+
