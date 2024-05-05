@@ -22,7 +22,6 @@ Main Styles
   width: 350px;
   margin: 0 auto;
   padding: 15px 30px;
-  border-radius: 25px;
 }
 
 #extensionName {
@@ -36,7 +35,7 @@ Main Styles
   font-family: Helvetica, Arial, Sans-Serif;
 }
 
-#saveButton, #removeButton, #hiddenResetButtonSizeCheck {
+#saveButton, #removeButton, #toggleVisibility {
   padding: 5px 10px;
   margin: 5px 5px 5px 0;
   cursor: pointer;
@@ -55,15 +54,19 @@ Main Styles
 Reload button styles
 ==============================================*/
 #reload {
-  position: fixed;
+  position: absolute;
   height: 100px;
   width: 100px;
   top: 0;
-  right: 0;
-  background-color: red ;
+  left: 0;
   z-index: 25;
   background-color: none;
 }
+
+#reload.isVisible {
+  background-color: red ;
+}
+
 
 /*==============================================
 Modal

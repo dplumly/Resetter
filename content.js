@@ -1,32 +1,28 @@
 console.log("Content script loaded");
 
 ////////////////////////////////////////////////////////////////////////////
+// Hidden reload button 
+////////////////////////////////////////////////////////////////////////////
 
 // // Hidden reload button
 const hiddenResetButton = document.createElement("div");
 hiddenResetButton.setAttribute("id", "reload");
 document.body.append(hiddenResetButton); 
 
-
-// Function to reload the page based on user input
-document.getElementById('reload').addEventListener('click', () => {
-
-chrome.storage.local.get(["userInput"], (result) => {
-    let userInput = result.userInput;
-
-        if (userInput) {
-            if (userInput.trim() !== '') {
-                window.location.assign(userInput); // Redirect to the specified URL
-            }            
-        } else {
-            window.location.reload(true); // Reload the current page if no userInput is stored
-        }     
-    });  
+// Function to visually see the reload button
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if (request.message) {
+        const makeVisable = document.getElementById('reload');
+        makeVisable.classList.toggle('isVisible');
+        console.log('Reveal!');
+    }
 });
 
 ////////////////////////////////////////////////////////////////////////////
+// Timeout functions to reset page after 'X' amount of seconds
+////////////////////////////////////////////////////////////////////////////
 
-// Variables for timeout function
+// Variables for timeout function and creating elements
 let timeoutID;
 let timeLeft = 35;
 let timeOutTotalTime = 1000; 
@@ -48,7 +44,6 @@ timer.setAttribute("id", "timer");
 const continueButton = document.createElement("button");
 continueButton.setAttribute("id", "continue");
 continueButton.textContent = 'Continue';
-
 
 
 // activity that keeps the page live
@@ -86,46 +81,46 @@ function resetTimer() {
 
 
 // modal pop up and will reset the page if no activity
-// function goInactive() {
-//      document.body
-//         .appendChild(timeoutModal)
-//         .appendChild(copy)
-//         .appendChild(continueButton);
+function goInactive() {
+     document.body
+        .appendChild(timeoutModal)
+        .appendChild(copy)
+        .appendChild(continueButton);
 
-//         document.body.appendChild(timer);
-//         document.body.appendChild(modalBackground);
-//         timeoutModal.classList.add('fadeInModal'); 
+        document.body.appendChild(timer);
+        document.body.appendChild(modalBackground);
+        timeoutModal.classList.add('fadeInModal'); 
     
-//     intervalId = setInterval(() => {   
-//         console.log("goInactive function");
+    intervalId = setInterval(() => {   
+        console.log("goInactive function");
 
-//         // Display the elements
-//         timeoutModal.style.display = 'block';
-//         timer.style.display = 'table';
-//         continueButton.style.display = 'block';
-//         modalBackground.style.display = 'block';
+        // Display the elements
+        timeoutModal.style.display = 'block';
+        timer.style.display = 'table';
+        continueButton.style.display = 'block';
+        modalBackground.style.display = 'block';
 
-//         timer.innerHTML = String(timeLeft);
-//         timeLeft--;
+        timer.innerHTML = String(timeLeft);
+        timeLeft--;
 
-//         if (timeLeft === 0) {
-//             chrome.storage.local.get(["userInput"], (result) => {
-//                 let userInput = result.userInput;
-//                 console.log("User input is " + userInput);
+        if (timeLeft === 0) {
+            chrome.storage.local.get(["userInput"], (result) => {
+                let userInput = result.userInput;
+                console.log("User input is " + userInput);
         
-//                 if (userInput) {
-//                     if (userInput.trim() !== '') {
-//                         window.location.assign(userInput); // Redirect to the specified URL
-//                     } else {
-//                         window.location.reload(true); // Reload the current page
-//                     }
-//                 } else {
-//                     window.location.reload(true); // Reload the current page if no userInput is stored
-//                 }
-//             });
-//         }
+                if (userInput) {
+                    if (userInput.trim() !== '') {
+                        window.location.assign(userInput); // Redirect to the specified URL
+                    } else {
+                        window.location.reload(true); // Reload the current page
+                    }
+                } else {
+                    window.location.reload(true); // Reload the current page if no userInput is stored
+                }
+            });
+        }
         
-//     }, 1000);
-//     timeLeft = 35;
-// }
+    }, 1000);
+    timeLeft = 35;
+}
 

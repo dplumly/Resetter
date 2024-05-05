@@ -1,11 +1,13 @@
- ////////////////////////////////////////////////////////////////////////////
-// Send message to content.js - https://stackoverflow.com/questions/29926598/sendmessage-from-popup-to-content-js-not-working-in-chrome-extension
 console.log('popup.js loaded');
+
+
+////////////////////////////////////////////////////////////////////////////
+// Saving data to chrome storage for setting the root URL so after reload goes to current location or root
+////////////////////////////////////////////////////////////////////////////
 
 // Save Data to Storage:
 document.getElementById('saveButton').addEventListener('click', () => {
     let userInput = document.getElementById('userInputField').value.trim();
-
     console.log('button saved clicked');
 
     if (userInput !== '') {
@@ -32,8 +34,7 @@ document.getElementById('removeButton').addEventListener('click', () => {
     });
 });
 
-// Retrieve Data from Storage (optional, to display stored data when the extension is loaded):
-// This code should be placed inside a function that runs when the extension popup is opened or when needed.
+// Retrieve Data from Storage 
 chrome.storage.local.get('userInput', (result) => {
     let userInput = result.userInput;
     if (userInput) {
@@ -44,63 +45,26 @@ chrome.storage.local.get('userInput', (result) => {
 });
 
 
+////////////////////////////////////////////////////////////////////////////
+// Sending message to content.js to toggle hidden reload button's visibility
+////////////////////////////////////////////////////////////////////////////
 
+// //Hidden Reload Button Visability
+document.addEventListener('DOMContentLoaded', () => {
+    let sendMessageBtn = document.getElementById('toggleVisibility');
+    console.log("Gate 1");
 
-
-
-
-
-
-
-
-
-
-
-
-// document.getElementById('saveButton').addEventListener('click', () => {
-//     userInput = document.getElementById('userInputField').value.trim();
-
-//     if (userInput !== '') {
-//         localStorage.setItem('userInput', userInput);
-//         document.getElementById('storedHomepage').textContent = userInput;
-//         document.getElementById('inputStatus').textContent = 'Input saved successfully.';
-
-//         console.log(userInput);
-//         // Remove the user input
-//         document.getElementById('removeButton').addEventListener('click', () => {
-//                 localStorage.removeItem('userInput');
-//                 document.getElementById('inputStatus').textContent = 'Input removed';
-//                 document.getElementById('storedHomepage').textContent = '';
-//                 userInput = null;
-//                 localStorage.clear();
-//                 document.getElementById('userInputField').value = '';
-//                 console.log('removed function');
-//             });
-//     }
-// });
-
-// document.getElementById('saveButton').addEventListener('click', () => {
-//     userInput = document.getElementById('userInputField').value.trim();
-
-//     if (userInput !== '') {
-//         localStorage.setItem('userInput', userInput);
-//         document.getElementById('storedHomepage').textContent = userInput;
-//         document.getElementById('inputStatus').textContent = 'Input saved successfully.';
-
-//         console.log(userInput);
-//         // Remove the user input
-//         document.getElementById('removeButton').addEventListener('click', () => {
-//                 localStorage.removeItem('userInput');
-//                 document.getElementById('inputStatus').textContent = 'Input removed';
-//                 document.getElementById('storedHomepage').textContent = '';
-//                 userInput = null;
-//                 localStorage.clear();
-//                 document.getElementById('userInputField').value = '';
-//                 console.log('removed function');
-//             });
-//     }
-// });
-
+    sendMessageBtn.addEventListener('click', () => {
+        let messageToSend = true;
+        console.log("Gate 2");
+        
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, {message: messageToSend}, function(response) {
+                console.log("Message sent from popup script");
+            });
+        });
+    });
+});
 
 
 
