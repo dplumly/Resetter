@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+
  
 /*==============================================
 Fonts
@@ -18,14 +19,18 @@ Fonts
 Main Styles
 ==============================================*/
 #popUpContainer {
-  height: 350px;
+  /* height: 330px; */
+  height: auto;
   width: 350px;
   margin: 0 auto;
   padding: 15px 30px;
+  background-color: #131518;
+  border: 5px#68F5B2 solid;;
 }
 
 #extensionName {
   padding: 10px 0;
+  color: #68F5B2;
 }
 
 #inputStatus  {
@@ -33,17 +38,46 @@ Main Styles
   font-size: 20px;
   font-weight: 400;
   font-family: Helvetica, Arial, Sans-Serif;
+  color: #68F5B2;
+  border: 0;
 }
 
 #saveButton, #removeButton, #toggleVisibility {
   padding: 5px 10px;
   margin: 5px 5px 5px 0;
   cursor: pointer;
+  border-style: none;
+  border-radius: 5px;
+}
+
+#toggleVisibility {
+  background-color: #68F5B2;
+  color: #000000;
+  margin-top: 75px;
+}
+
+#saveButton {
+  background-color: #68F5B2;
+  color: #000000;
+  margin-top: 10px;
+}
+
+#removeButton {
+  background-color: #f0064b;
+  color: #000000;
+  margin-top: 10px;
 }
 
 #userInputField {
   padding: 5px 10px;
   margin: 5px 5px 5px 0;
+  background-color: #343436 !important;
+  color: #757577;
+  border-style: none;
+}
+
+#homepage {
+  color: #68F5B2;
 }
 
 #hiddenResetButtonPostitioning {
@@ -59,12 +93,13 @@ Reload button styles
   width: 100px;
   top: 0;
   left: 0;
-  z-index: 25;
+  z-index: 100000;
   background-color: none;
 }
 
 #reload.isVisible {
-  background-color: red ;
+  background-color: #000000;
+  border: 3px solid #68F5B2 ;
 }
 
 

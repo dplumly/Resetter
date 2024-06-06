@@ -1,6 +1,7 @@
-
+<!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8" />
         <link rel='stylesheet' type='text/css' href='main.css'>
     </head>
 <body>
@@ -9,33 +10,16 @@
 <div id="popUpContainer">
     <h1 id="extensionName">Resetter</h1>
 
-    <input type="text" id="userInputField" placeholder="Enter Reset URL">
+    <input type="text" id="userInputField" placeholder="Enter Root URL">
+    <br>
     <button id="saveButton">Save</button>
     <button id="removeButton">Remove</button>
 
     <p id="inputStatus"></p>
-    <p>Stored Homepage: <span id="storedHomepage"></span></p>
+    <p id="homepage">Stored Homepage: <span id="storedHomepage"></span></p>
 
 
-    <!-- <div id="hiddenResetButtonContainer"> -->
-        <button id="toggleVisibility">Hidden Reset Button</button>
-
-
-        <!-- <div id="hiddenResetButtonPostitioning">
-            <input type="radio" id="topLeft" name="selectHiddenButtonPositioning" value="topLeft">
-            <label for="topLeft">Top Left</label><br>
-
-            <input type="radio" id="topRight" name="selectHiddenButtonPositioning" value="topRight" checked>
-            <label for="topRight">Top Right</label><br>
-
-            <input type="radio" id="bottomLeft" name="selectHiddenButtonPositioning" value="bottomLeft">
-            <label for="bottomLeft">Bottom Left</label><br>
-
-            <input type="radio" id="bottomRight" name="selectHiddenButtonPositioning" value="bottomRight">
-            <label for="bottomRight">Bottom Right</label><br>
-        </div> -->
-    <!-- </div> -->
-
+    <button id="toggleVisibility">View Hidden Reset Button</button>
 </div>
 
 <script src="popup.js"></script>

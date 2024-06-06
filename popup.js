@@ -52,19 +52,30 @@ chrome.storage.local.get('userInput', (result) => {
 // //Hidden Reload Button Visability
 document.addEventListener('DOMContentLoaded', () => {
     let sendMessageBtn = document.getElementById('toggleVisibility');
-    console.log("Gate 1");
+    console.log("Hidden button visibility - Gate 1");
 
     sendMessageBtn.addEventListener('click', () => {
         let messageToSend = true;
-        console.log("Gate 2");
+        console.log("Hidden button visibility - Gate 2");
         
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
             chrome.tabs.sendMessage(tabs[0].id, {message: messageToSend}, function(response) {
-                console.log("Message sent from popup script");
+                console.log("Hidden button visibility - Message sent from popup script");
             });
         });
     });
 });
+
+
+
+
+
+
+
+
+
+
+
 
 
 
