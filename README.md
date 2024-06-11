@@ -14,6 +14,25 @@ To load the extension go to Chrome, Brave, Edge... <strong>"Extensions"</strong>
 <br>
 <br>
 
-Here is the popup UI. There are a few things to do here. 
+Here is the popup UI. There are a few things to do here.  
 <br>
-<img src="./assets/loading.png">
+
+- See where the reset button is located. This can also be changed in the main.css.
+- Add a <strong>"Root"</strong> URL to ensure when the reload happens manually or automatically it goes back to the root URL. 
+<br>
+
+<img src="./assets/popup.png">
+<br>
+<br>
+
+Image of the reset button enabled.
+<br>
+
+<img src="./assets/resetButton.png">
+<br>
+<br>
+
+Here is the timeout function. It is set for 10 seconds. This can be changed in the content.js. The styles can be changed in the main.css
+<br>
+
+<img src="./assets/timeout.png">
