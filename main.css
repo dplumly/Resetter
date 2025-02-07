@@ -8,18 +8,14 @@
 /*==============================================
 Fonts
 ==============================================*/
-/* IBM Plex Sans */
-/* @font-face {
-  font-family: 'IBM Plex Sans';
-  src: url('../fonts/IBM-Plex-Sans/IBMPlexSans-Regular.ttf') format('ttf'),
-      url('../fonts/IBM-Plex-Sans/IBMPlexSans-Regular-V01.1.otf') format('otf')
-} */
+h1, h2, h3, h4, h5, h6, p {
+  font-family: Helvetica, Arial, Sans-Serif;
+}
 
 /*==============================================
 Main Styles
 ==============================================*/
 #popUpContainer {
-  /* height: 330px; */
   height: auto;
   width: 350px;
   margin: 0 auto;
@@ -37,7 +33,6 @@ Main Styles
   margin: 10px 0;
   font-size: 20px;
   font-weight: 400;
-  font-family: Helvetica, Arial, Sans-Serif;
   color: #68F5B2;
   border: 0;
 }
@@ -111,12 +106,13 @@ Modal
   top: 50%;  
   left: 50%; 
   transform: translate(-50%, -50%); 
-  height: 325px;
+  height: 390px;
   width: 450px;
   border-radius: 25px;
   background: #ffffff;
   z-index: 10;
   display: none;
+  opacity: .9;
   transition: all ease 1s;
 }
 
@@ -125,8 +121,6 @@ Modal
   display: table;
   font-size: 34px;
   font-weight: 400;
-  font-family: Helvetica, Arial, Sans-Serif;
-  /* font-family: 'IBM Plex Sans', sans-serif; */
   color: #161616;
   z-index: 11;
 }
@@ -139,8 +133,7 @@ Modal
   display: none;
   margin: 0 auto;
   text-align: center;
-  font-family: Helvetica, Arial, Sans-Serif;
-  /* font-family: 'IBM Plex Sans', sans-serif; */
+  color: #000;
   font-size: 150px;
   z-index: 11;
 }
@@ -149,17 +142,36 @@ Modal
   position: absolute;
   width: 150px;
   color: #fff;
-  background: #0f62fe;
+  background: #00A1E0;
   border: none;
   display: none;
   font-size: 20px;
-  font-weight: 400;
-  font-family: Helvetica, Arial, Sans-Serif;
+  font-weight: 400; 
   padding: 10px 20px;
-  margin-top: 10px;
+  margin: 20px auto;
   cursor: pointer;
-  right: 90px;
-  bottom: 30px;
+  left: 200px;
+  right: 0;
+  bottom: 2%;
+  border-radius: 25px;
+  z-index: 11;
+}
+
+#restart {
+  position: absolute;
+  width: 150px;
+  color: #fff;
+  background: rgb(3, 45, 96);
+  border: none;
+  display: none;
+  font-size: 20px;
+  font-weight: 400; 
+  padding: 10px 20px;
+  margin: 20px auto;
+  cursor: pointer;
+  right: 200px;
+  left: 0;
+  bottom: 2%;
   border-radius: 25px;
   z-index: 11;
 }
@@ -186,6 +198,10 @@ Modal
   -ms-animation: fadeInModal 1s;
 }
 
+
+/*==============================================
+Animation
+==============================================*/
 @keyframes fadeInModal {
   0% {
       opacity: 0;
