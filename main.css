@@ -6,11 +6,38 @@
 
  
 /*==============================================
-Fonts
+Fonts for popup.html
 ==============================================*/
+@font-face {
+  font-family: 'Poppins-Black';
+  src:  url('chrome-extension://__MSG_@@extension_id__/fonts/Poppins-Black.tff') format('tff'),
+        url('chrome-extension://__MSG_@@extension_id__/fonts/Poppins-Black.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins-Bold';
+  src:  url('chrome-extension://__MSG_@@extension_id__/fonts/Poppins-Bold.tff') format('tff'),
+        url('chrome-extension://__MSG_@@extension_id__/fonts/Poppins-Bold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins-Regular';
+  src:  url('chrome-extension://__MSG_@@extension_id__/fonts/Poppins-Regular.ttf') format('tff'),
+        url('chrome-extension://__MSG_@@extension_id__/fonts/Poppins-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 h1, h2, h3, h4, h5, h6, p {
   font-family: Helvetica, Arial, Sans-Serif;
 }
+
+
 
 /*==============================================
 Main Styles
@@ -21,28 +48,42 @@ Main Styles
   margin: 0 auto;
   padding: 15px 30px;
   background-color: #131518;
-  border: 5px#68F5B2 solid;;
+  border: 2px#68F5B2 solid;
 }
 
 #extensionName {
   padding: 10px 0;
-  color: #68F5B2;
+  color: #ffffff;
+  font-family: 'Poppins-Black', Sans-Serif;
+  font-size: 24px;
+  text-transform: uppercase;
+}
+
+#userInputField {
+  width: 265px;
 }
 
 #inputStatus  {
-  margin: 10px 0;
-  font-size: 20px;
-  font-weight: 400;
-  color: #68F5B2;
+  margin-top: 10px;
+  font-size: 16px;
+  font-family: 'Poppins-Bold', Sans-Serif;
+  color: #ffffff;
   border: 0;
+}
+
+#saveButton, #removeButton {
+  width: 72px;
+  height: 25px;
 }
 
 #saveButton, #removeButton, #toggleVisibility {
   padding: 5px 10px;
-  margin: 5px 5px 5px 0;
+  margin: 5px 15px 5px 0;
   cursor: pointer;
   border-style: none;
-  border-radius: 5px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-family: 'Poppins-Bold', Sans-Serif;
 }
 
 #toggleVisibility {
@@ -72,6 +113,11 @@ Main Styles
 }
 
 #homepage {
+  font-family: 'Poppins-Regular', Sans-Serif;
+  color: #ffffff;
+}
+
+#storedHomepage {
   color: #68F5B2;
 }
 
