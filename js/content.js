@@ -50,7 +50,7 @@ function reloadPageOrRedirect() {
 
 let timeoutID;
 let timeLeft = 10;
-let timeOutTotalTime = 5000;
+let timeOutTotalTime = 60000;
 let intervalId = null;
 
 // Creating modal elements
@@ -75,8 +75,13 @@ const restartButton = document.createElement("button");
 restartButton.setAttribute("id", "restart");
 restartButton.textContent = 'Restart';
 
+const imgEyes = document.createElement('img');
+imgEyes.setAttribute("id", "eyesImage");
+imgEyes.src = chrome.runtime.getURL('img/eyes.gif');
+
 
 // Append modal elements
+timeoutModal.appendChild(imgEyes);
 timeoutModal.appendChild(copy);
 timeoutModal.appendChild(continueButton);
 timeoutModal.appendChild(restartButton); 

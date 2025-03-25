@@ -4,7 +4,6 @@
   box-sizing: border-box;
 }
 
- 
 /*==============================================
 Fonts for popup.html
 ==============================================*/
@@ -32,28 +31,34 @@ Fonts for popup.html
   font-style: normal;
 }
 
+@font-face {
+    font-family: 'Poppins-Light';
+    src:  url('chrome-extension://__MSG_@@extension_id__/fonts/Poppins-Light.ttf') format('tff'),
+          url('chrome-extension://__MSG_@@extension_id__/fonts/Poppins-Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+
 
 h1, h2, h3, h4, h5, h6, p {
   font-family: Helvetica, Arial, Sans-Serif;
 }
 
-
-
 /*==============================================
-Main Styles
+Popup html styles
 ==============================================*/
 #popUpContainer {
   height: auto;
   width: 350px;
   margin: 0 auto;
   padding: 15px 30px;
-  background-color: #131518;
-  border: 2px#68F5B2 solid;
+  background-color: #3B3B3B;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 #extensionName {
   padding: 10px 0;
-  color: #ffffff;
+  color: #00A8E8;
   font-family: 'Poppins-Black', Sans-Serif;
   font-size: 24px;
   text-transform: uppercase;
@@ -71,6 +76,12 @@ Main Styles
   border: 0;
 }
 
+::placeholder {
+    color:#ffffff;
+    font-family: 'Poppins-Light', Sans-Serif;
+    opacity: 1; /* Firefox */
+  }
+
 #saveButton, #removeButton {
   width: 72px;
   height: 25px;
@@ -83,42 +94,43 @@ Main Styles
   border-style: none;
   border-radius: 20px;
   font-size: 12px;
-  font-family: 'Poppins-Bold', Sans-Serif;
+  font-family: 'Poppins-Re', Sans-Serif;
 }
 
 #toggleVisibility {
-  background-color: #68F5B2;
-  color: #000000;
+  background-color: #00A8E8;
+  color: #3B3B3B;
   margin-top: 75px;
 }
 
 #saveButton {
-  background-color: #68F5B2;
-  color: #000000;
+  background-color: #00A8E8;
+  color: #3B3B3B;
   margin-top: 10px;
 }
 
 #removeButton {
-  background-color: #f0064b;
-  color: #000000;
+  background-color: #FF6B6B;
+  color: #3B3B3B;
   margin-top: 10px;
 }
 
 #userInputField {
   padding: 5px 10px;
   margin: 5px 5px 5px 0;
-  background-color: #343436 !important;
-  color: #757577;
+  background-color: #6D6D6D !important;
+  color: #ffffff;
   border-style: none;
+  border-radius: 5px;
 }
 
 #homepage {
-  font-family: 'Poppins-Regular', Sans-Serif;
+  font-family: 'Poppins-Light', Sans-Serif;
   color: #ffffff;
 }
 
 #storedHomepage {
-  color: #68F5B2;
+  color: #FFB400;
 }
 
 #hiddenResetButtonPostitioning {
@@ -139,13 +151,13 @@ Reload button styles
 }
 
 #reload.isVisible {
-  background-color: #000000;
-  border: 3px solid #68F5B2 ;
+  background-color: #3B3B3B;
+  border: 3px solid #00A8E8 ;
 }
 
 
 /*==============================================
-Modal
+Modal styles
 ==============================================*/
 #timerWrapper {
   position: fixed;
@@ -162,37 +174,46 @@ Modal
   transition: all ease 1s;
 }
 
+#eyesImage {
+    height: 50px;
+    width: 50px;
+    margin: 20px auto 0 auto;
+    display: table;
+  }
+
 #headerCopy {
-  margin: 30px auto 0 auto;
-  display: table;
-  font-size: 34px;
-  font-weight: 400;
-  color: #161616;
-  z-index: 11;
+    margin: 10px auto 0 auto;
+    display: table;
+    font-size: 35px;
+    font-family: 'Poppins-Bold', sans-serif;
+    color: #3B3B3B;
+    z-index: 11;
 }
 
 #timer {
-  position: fixed;
-  top: 50%;  
-  left: 50%; 
-  transform: translate(-50%, -50%); 
-  display: none;
-  margin: 0 auto;
-  text-align: center;
-  color: #000;
-  font-size: 150px;
-  z-index: 11;
-}
+    position: fixed;
+    top: 50%;  
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    display: none;
+    margin: 10px auto 0 auto;
+    text-align: center;
+    font-family: 'Poppins-Regular', sans-serif;
+    color: #3B3B3B;
+    font-size: 110px;
+    z-index: 11;
+  }
 
 #continue {
   position: absolute;
   width: 150px;
   color: #fff;
-  background: #00A1E0;
+  background: #00A8E8;
   border: none;
   display: none;
   font-size: 20px;
   font-weight: 400; 
+  font-family: 'Poppins-Regular', sans-serif;
   padding: 10px 20px;
   margin: 20px auto;
   cursor: pointer;
@@ -204,36 +225,37 @@ Modal
 }
 
 #restart {
-  position: absolute;
-  width: 150px;
-  color: #fff;
-  background: rgb(3, 45, 96);
-  border: none;
-  display: none;
-  font-size: 20px;
-  font-weight: 400; 
-  padding: 10px 20px;
-  margin: 20px auto;
-  cursor: pointer;
-  right: 200px;
-  left: 0;
-  bottom: 2%;
-  border-radius: 25px;
-  z-index: 11;
-}
+    position: absolute;
+    width: 150px;
+    color: #fff;
+    background: #FF6B6B;
+    border: none;
+    display: none;
+    font-size: 20px;
+    font-weight: 400; 
+    font-family: 'Poppins-Regular', sans-serif;
+    padding: 10px 20px;
+    margin: 20px auto;
+    cursor: pointer;
+    right: 200px;
+    left: 0;
+    bottom: 2%;
+    border-radius: 25px;
+    z-index: 11;
+  }
 
 #modalBackground {
-  display: none;
-  height: 100%;
-  width: 100%;
-  background: #000;
-  opacity: .7;
-  z-index: 9;
-   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+    display: none;
+    height: 100%;
+    width: 100%;
+    background: #000;
+    opacity: .7;
+    z-index: 9;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 .fadeInModal {

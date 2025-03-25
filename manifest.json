@@ -9,13 +9,20 @@
         "http://*/*",
         "https://*/*"
     ],
-      "css": ["main.css"],
-      "js": ["content.js"] 
+      "css": ["css/main.css"],
+      "js": ["js/content.js"] 
     }
   ],
   "icons": {
     "48": "Resetter-Logo.png"
   },
+  "web_accessible_resources": [
+    {
+      "resources": ["img/eyes.gif", "fonts/*.ttf", "fonts/*.woff2", "fonts/*.woff"],
+      "extension_ids": ["*"],
+      "matches": ["*://*/*"]
+    }
+  ],
   "action": {
     "default_popup": "popup.html"
     },
