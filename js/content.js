@@ -24,6 +24,35 @@ document.getElementById('reload').addEventListener('click', () => {
 
 
 ////////////////////////////////////////////////////////////////////////////
+// Disable timeout checkbox 
+////////////////////////////////////////////////////////////////////////////
+// document.getElementById('toggleTinmeout').addEventListener('change', () => {
+
+// let isEnabled = true;
+
+//     if (isEnabled) {
+//         console.log('On');
+//     } else {
+//         console.log('Off');
+//     }
+// });
+
+
+
+// Function to visually see the reload button
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    let isEnabled = true;
+
+    if (request.message) {
+        if (isEnabled) {
+            console.log('On');
+        } else {
+            console.log('Off');
+        }
+    }
+});
+
+////////////////////////////////////////////////////////////////////////////
 // Function to reload page or redirect based on user input
 ////////////////////////////////////////////////////////////////////////////
 function reloadPageOrRedirect() {
@@ -47,10 +76,9 @@ function reloadPageOrRedirect() {
 ////////////////////////////////////////////////////////////////////////////
 // Timeout functions to reset page after 'X' amount of seconds
 ////////////////////////////////////////////////////////////////////////////
-
 let timeoutID;
-let timeLeft = 10;
-let timeOutTotalTime = 60000;
+let timeLeft = 1000;
+let timeOutTotalTime = 3000;
 let intervalId = null;
 
 // Creating modal elements
@@ -138,7 +166,7 @@ function resetTimer(event) {
 function goInactive() {
     timer.style.display = 'table';
     timeoutModal.classList.add('fadeInModal');
-    timeLeft = 10;  
+    timeLeft = 1000;  
   
     intervalId = setInterval(() => {
         // Display the elements - Set them here to make sure the counter displays on the first interval 

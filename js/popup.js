@@ -68,6 +68,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+////////////////////////////////////////////////////////////////////////////
+// Sending message to content.js to disable timeout
+////////////////////////////////////////////////////////////////////////////
+
+// //Hidden Reload Button Visability
+document.addEventListener('DOMContentLoaded', () => {
+    let sendMessageCheckbox = document.getElementById('toggleTimeout');
+    console.log("toggle timeout - Gate 1");
+
+    sendMessageCheckbox.addEventListener('click', () => {
+        let messageToSendTimeout = true;
+        console.log("toggle timeout- Gate 2");
+        
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, {message: messageToSendTimeout}, function(response) {
+                console.log("toggle timeout- Message sent from popup script");
+            });
+        });
+    });
+});
+
+
+
 
 
 
