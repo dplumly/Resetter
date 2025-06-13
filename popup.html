@@ -19,11 +19,37 @@
     <p id="inputStatus"></p>
     <p id="homepage">Stored Homepage: <span id="storedHomepage"></span></p>
 
-
-    <button id="toggleVisibility">View Hidden Reset Button</button>
+    <div id="buttonContainer">
+        <button id="toggleVisibility">View Hidden Reset Button</button>
+        <input type="checkbox" id="disableTImeout" /><label id="disableTimeoutLabel">Disable Timeout</label>
+    </div>
     
-    <input id="toggleTimeout" type="checkbox" checked name="toggleTimeout">
-    <label id="toggleTimeoutLabel" for="toggleTimeout"> Toggle Timeout</label>
+
+    <!-- Modal Button Styling Settings -->
+    <div>
+        <h3 id="modalHeader">Modal Button Styling</h3>
+
+        <ul>
+            <li class="colorPickers">
+                <label for="continueButtonBgColor">Continue Button Background:</label>
+                <input type="color" id="continueButtonBgColor" value="#00A8E8" />
+            </li>
+            <li class="colorPickers">
+                <label for="continueButtonTextColor">Continue Button Text Color:</label>
+                <input type="color" id="continueButtonTextColor" value="#ffffff" />
+            </li>
+            <li class="colorPickers">
+                <label for="restartButtonBgColor">Restart Button Background:</label>
+                <input type="color" id="restartButtonBgColor" value="#FF6B6B" />
+            </li>
+            <li class="colorPickers">
+                 <label for="restartButtonTextColor">Restart Button Text Color:</label>
+                <input type="color" id="restartButtonTextColor" value="#ffffff" />
+            </li>
+        </ul>
+        
+        <button id="saveButtonStyling">Save Button Stylings</button>
+    </div>
 </div>
 
 <script src="js/popup.js"></script>

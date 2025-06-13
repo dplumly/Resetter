@@ -49,7 +49,7 @@ Popup html styles
 ==============================================*/
 #popUpContainer {
   height: auto;
-  width: 350px;
+  width: 415px;
   margin: 0 auto;
   padding: 15px 30px;
   background-color: #3B3B3B;
@@ -94,13 +94,14 @@ Popup html styles
   border-style: none;
   border-radius: 20px;
   font-size: 12px;
-  font-family: 'Poppins-Re', Sans-Serif;
+  font-family: 'Poppins-Regular', Sans-Serif;
 }
 
+
+/*============  Buttons  ==============*/
 #toggleVisibility {
   background-color: #00A8E8;
   color: #3B3B3B;
-  margin-top: 75px;
 }
 
 #saveButton {
@@ -137,12 +138,70 @@ Popup html styles
   margin-top: 15px;
 }
 
-/*==============================================
-isEnabled styles
-==============================================*/
-#toggleTimeoutLabel {
-    color: #ffffff;
+#buttonContainer {
+    margin: 35px 0 35px 0;
 }
+
+#disableTImeout {
+    zoom: 2;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+#disableTimeoutLabel {
+    vertical-align: middle;
+    color: #ffffff;
+    font-family: 'Poppins-Regular', Sans-Serif;
+    font-size: 12px;
+
+}
+
+/*============  Button color pickers  ==============*/
+#modalHeader {
+    color: #00A8E8;
+    font-family: 'Poppins-Bold', Sans-Serif;
+    margin: 0 auto;
+    display: table;
+    margin-bottom: 20px;
+}
+
+.colorPickers {
+    list-style: none;
+    color: #ffffff;
+    font-family: 'Poppins-Regular', Sans-Serif;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+#continueButtonBgColor {
+    margin-left: 20px;
+}
+
+#continueButtonTextColor {
+    margin-left: 37px;
+}
+
+#restartButtonBgColor {
+    margin-left: 35px;
+}
+
+#restartButtonTextColor {
+    margin-left: 52px;   
+}
+
+#saveButtonStyling {
+    padding: 5px 10px;
+    cursor: pointer;
+    border-style: none;
+    border-radius: 20px;
+    font-size: 12px;
+    font-family: 'Poppins-Regular', Sans-Serif;
+    background-color: #00A8E8;
+    margin: 25px 0 ;
+}
+    
+    
+
 /*==============================================
 Reload button styles
 ==============================================*/
@@ -214,7 +273,7 @@ Modal styles
   position: absolute;
   width: 150px;
   color: #fff;
-  background: #00A8E8;
+  background-color: #00A8E8;
   border: none;
   display: none;
   font-size: 20px;
