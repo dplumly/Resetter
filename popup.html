@@ -10,23 +10,35 @@
 <div id="popUpContainer">
     <h1 id="extensionName">Resetter</h1>
 
-    <input type="text" id="userInputField" placeholder="Enter Root URL">
-    <br>
-    <button id="removeButton">Remove</button>
-    <button id="saveButton">Save</button>
-    
+    <div id="saveRootContainer">
+        <input type="text" id="userInputField" placeholder="Enter Root URL">
+        <br>
+        <button id="removeButton">Remove</button>
+        <button id="saveButton">Save</button>
+        
 
-    <p id="inputStatus"></p>
-    <p id="homepage">Stored Homepage: <span id="storedHomepage"></span></p>
-
-    <div id="buttonContainer">
-        <button id="toggleVisibility">View Hidden Reset Button</button>
-        <input type="checkbox" id="disableTImeout" /><label id="disableTimeoutLabel">Disable Timeout</label>
+        <p id="inputStatus"></p>
+        <p id="homepage">Stored Homepage: <span id="storedHomepage"></span></p>
     </div>
     
 
+    <div id="hiddenDisableContainer">
+        <div id="buttonContainer">
+            <button id="toggleVisibility">View Hidden Reset Button</button>
+            <input type="checkbox" id="disableTImeout" /><label id="disableTimeoutLabel">Disable Timeout</label>
+        </div>
+
+
+        <div id="timeoutDurationContainer">
+            <input type="range" id="timeoutDuration" name="timeout" min="10" max="300" step="10" />
+            <label for="timeoutDuration">Timeout Duration: <span id="timeoutValue">60</span></label>
+        </div>
+    </div>
+   
+    
+
     <!-- Modal Button Styling Settings -->
-    <div>
+    <div id="modalButtons">
         <h3 id="modalHeader">Modal Button Styling</h3>
 
         <ul>
@@ -46,14 +58,15 @@
                  <label for="restartButtonTextColor">Restart Button Text Color:</label>
                 <input type="color" id="restartButtonTextColor" value="#ffffff" />
             </li>
-        </ul>
-        
-        <button id="saveButtonStyling">Save Button Stylings</button>
-    </div>
+            <button id="saveButtonStyling">Save Button Colors</button>
 
-    <div id="cornerRadiusContainer">
-        <input type="range" id="cornerRadious" name="roundness" min="0" max="50" />
-        <label for="roundness">Roundness</label>
+        </ul>
+
+
+        <div id="cornerRadiusContainer">
+            <input type="range" id="cornerRadious" name="roundness" min="0" max="50" />
+            <label for="roundness">Button roundness</label>
+        </div>
     </div>
 </div>
 

@@ -39,7 +39,6 @@ Fonts for popup.html
     font-style: normal;
   }
 
-
 h1, h2, h3, h4, h5, h6, p {
   font-family: Helvetica, Arial, Sans-Serif;
 }
@@ -49,7 +48,7 @@ Popup html styles
 ==============================================*/
 #popUpContainer {
   height: auto;
-  width: 415px;
+  width: 450px;
   margin: 0 auto;
   padding: 15px 30px;
   background-color: #3B3B3B;
@@ -60,8 +59,15 @@ Popup html styles
   padding: 10px 0;
   color: #00A8E8;
   font-family: 'Poppins-Black', Sans-Serif;
-  font-size: 24px;
+  font-size: 28px;
   text-transform: uppercase;
+  margin: 0 auto;
+  display: table;
+}
+
+#saveRootContainer {
+    margin: 0 auto;
+    display: table;
 }
 
 #userInputField {
@@ -96,7 +102,6 @@ Popup html styles
   font-size: 12px;
   font-family: 'Poppins-Regular', Sans-Serif;
 }
-
 
 /*============  Buttons  ==============*/
 #toggleVisibility {
@@ -134,14 +139,21 @@ Popup html styles
   color: #FFB400;
 }
 
+/*============  Hidden reset button  ==============*/
+#hiddenDisableContainer {
+    margin: 0 auto;
+    display: table;
+}
+
 #hiddenResetButtonPostitioning {
   margin-top: 15px;
 }
 
 #buttonContainer {
-    margin: 35px 0 35px 0;
+    margin: 35px 0 15px 0;
 }
 
+/*============  Disable timer  ==============*/
 #disableTImeout {
     zoom: 2;
     margin-right: 5px;
@@ -153,7 +165,28 @@ Popup html styles
     color: #ffffff;
     font-family: 'Poppins-Regular', Sans-Serif;
     font-size: 12px;
+}
 
+/*============  Timeout duration  ==============*/
+#timeoutDurationContainer {
+    margin: 5px auto 25px auto;
+    display: table;
+}
+
+#timeoutDurationContainer label {
+    color: #ffffff;
+    font-family: 'Poppins-Regular', Sans-Serif;
+    margin-left: 10px;
+    vertical-align: bottom;
+}
+
+#timeoutValue {
+    color: #ffffff;
+    font-family: 'Poppins-Regular', Sans-Serif;
+}
+
+#timeoutDuration {
+  accent-color: #00A8E8;
 }
 
 /*============  Button color pickers  ==============*/
@@ -162,7 +195,19 @@ Popup html styles
     font-family: 'Poppins-Bold', Sans-Serif;
     margin: 0 auto;
     display: table;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+}
+
+#modalButtons label {
+    color: #ffffff;
+    font-family: 'Poppins-Regular', Sans-Serif;
+    margin-left: 10px;
+    vertical-align: super;
+}
+
+#modalButtons ul {
+    margin: 0 auto;
+    display: table;
 }
 
 .colorPickers {
@@ -197,12 +242,18 @@ Popup html styles
     font-size: 12px;
     font-family: 'Poppins-Regular', Sans-Serif;
     background-color: #00A8E8;
-    margin: 25px 0 ;
+    /* margin-left: 35px; */
 }
 
+/*============  Corner radius styling  ==============*/
 #cornerRadiusContainer {
-    margin: 0 auto;
+    margin: 20px auto;
     display: table;
+}
+
+#cornerRadiusContainer h3 {
+    color: #00A8E8;
+    margin-bottom: 10px;
 }
 
 #cornerRadiusContainer label {
@@ -210,7 +261,6 @@ Popup html styles
     margin-left: 20px;
     vertical-align: bottom;
     font-family: 'Poppins-Regular', Sans-Serif;
-
 }
 
 #cornerRadious {
