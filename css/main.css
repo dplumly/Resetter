@@ -199,8 +199,23 @@ Popup html styles
     background-color: #00A8E8;
     margin: 25px 0 ;
 }
-    
-    
+
+#cornerRadiusContainer {
+    margin: 0 auto;
+    display: table;
+}
+
+#cornerRadiusContainer label {
+    color: #ffffff;
+    margin-left: 20px;
+    vertical-align: bottom;
+    font-family: 'Poppins-Regular', Sans-Serif;
+
+}
+
+#cornerRadious {
+  accent-color: #00A8E8;
+}
 
 /*==============================================
 Reload button styles
