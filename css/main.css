@@ -34,28 +34,28 @@ Fonts for popup.html
   }
 
 h1, h2, h3, h4, h5, h6, p {
-  font-family: Helvetica, Arial, Sans-Serif;
+    font-family: Helvetica, Arial, Sans-Serif;
 }
 
 /*==============================================
 Popup html styles
 ==============================================*/
 #popUpContainer {
-  height: auto;
-  width: 450px;
-  margin: 0 auto;
-  padding: 15px 30px;
-  background-color: #3B3B3B;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    height: auto;
+    width: 450px;
+    margin: 0 auto;
+    padding: 15px 30px;
+    background-color: #3B3B3B;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 #extensionName {
-  color: #00A8E8;
-  font-family: 'Poppins-Black', Sans-Serif;
-  font-size: 28px;
-  text-transform: uppercase;
-  margin: 0 auto;
-  display: table;
+    color: #00A8E8;
+    font-family: 'Poppins-Black', Sans-Serif;
+    font-size: 28px;
+    text-transform: uppercase;
+    margin: 0 auto;
+    display: table;
 }
 
 #saveRootContainer {
@@ -66,10 +66,10 @@ Popup html styles
 #userInputField { width: 265px; }
 
 #inputStatus  {
-  margin-top: 5px;
-  font-size: 16px;
-  font-family: 'Poppins-Bold', Sans-Serif;
-  color: #ffffff;
+    margin-top: 5px;
+    font-size: 16px;
+    font-family: 'Poppins-Bold', Sans-Serif;
+    color: #ffffff;
 }
 
 ::placeholder {
@@ -79,50 +79,52 @@ Popup html styles
   }
 
 #saveButton, #removeButton {
-  width: 72px;
-  height: 25px;
+    width: 72px;
+    height: 25px;
 }
 
 #saveButton, #removeButton, #toggleVisibility {
-  padding: 5px 10px;
-  margin: 5px 15px 5px 0;
-  cursor: pointer;
-  border-style: none;
-  border-radius: 20px;
-  font-size: 12px;
-  font-family: 'Poppins-Regular', Sans-Serif;
+    padding: 5px 10px;
+    margin: 5px 15px 5px 0;
+    cursor: pointer;
+    border-style: none;
+    border-radius: 20px;
+    font-size: 12px;
+    font-family: 'Poppins-Regular', Sans-Serif;
 }
 
 /*============  Buttons  ==============*/
 #toggleVisibility {
-  background-color: #00A8E8;
-  color: #3B3B3B;
+    background-color: #00A8E8;
+    color: #3B3B3B;
 }
 
 #saveButton {
-  background-color: #00A8E8;
-  color: #3B3B3B;
-  margin-top: 10px;
+    background-color: #00A8E8;
+    color: #3B3B3B;
+    margin-top: 10px;
 }
 
 #removeButton {
-  background-color: #FF6B6B;
-  color: #3B3B3B;
-  margin-top: 10px;
+    background-color: #FF6B6B;
+    color: #3B3B3B;
+    margin-top: 10px;
 }
 
 #userInputField {
-  padding: 5px 10px;
-  margin: 5px 5px 5px 0;
-  background-color: #6D6D6D !important;
-  color: #ffffff;
-  border-style: none;
-  border-radius: 5px;
+    padding: 5px 10px;
+    margin: 5px 5px 5px 0;
+    background-color: #6D6D6D !important;
+    color: #ffffff;
+    border-style: none;
+    border-radius: 5px;
 }
 
 #homepage {
-  font-family: 'Poppins-Light', Sans-Serif;
-  color: #ffffff;
+    font-family: 'Poppins-Light', Sans-Serif;
+    color: #ffffff;
+    overflow-wrap: anywhere;
+    max-width: 285px;
 }
 
 #storedHomepage { color: #FFB400; }
@@ -134,7 +136,7 @@ Popup html styles
 }
 
 #hiddenResetButtonPostitioning { margin-top: 15px; }
-#buttonContainer { margin: 35px 0 15px 0; }
+#buttonContainer { margin: 3px 0 15px 0; }
 
 /*============  Disable timer  ==============*/
 #disableTImeout {
@@ -204,7 +206,7 @@ Popup html styles
 #continueButtonBgColor { margin-left: 20px; }
 #continueButtonTextColor { margin-left: 33px; }
 #restartButtonBgColor { margin-left: 33px; }
-#restartButtonTextColor { margin-left: 47px; }
+#restartButtonTextColor { margin-left: 46px; }
 
 #saveButtonStyling {
     padding: 5px 10px;
@@ -247,13 +249,13 @@ Popup html styles
 reload93451 button styles
 ==============================================*/
 #reload93451 {
-  position: absolute;
-  height: 100px;
-  width: 100px;
-  top: 0;
-  left: 0;
-  z-index: 100000;
-  background-color: none;
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    top: 0;
+    left: 0;
+    z-index: 100000;
+    background-color: none;
 }
 
 #reload93451.isVisible {
