@@ -56,7 +56,6 @@ Popup html styles
 }
 
 #extensionName {
-  padding: 10px 0;
   color: #00A8E8;
   font-family: 'Poppins-Black', Sans-Serif;
   font-size: 28px;
@@ -70,16 +69,13 @@ Popup html styles
     display: table;
 }
 
-#userInputField {
-  width: 265px;
-}
+#userInputField { width: 265px; }
 
 #inputStatus  {
-  margin-top: 10px;
+  margin-top: 5px;
   font-size: 16px;
   font-family: 'Poppins-Bold', Sans-Serif;
   color: #ffffff;
-  border: 0;
 }
 
 ::placeholder {
@@ -135,9 +131,7 @@ Popup html styles
   color: #ffffff;
 }
 
-#storedHomepage {
-  color: #FFB400;
-}
+#storedHomepage { color: #FFB400; }
 
 /*============  Hidden reset button  ==============*/
 #hiddenDisableContainer {
@@ -145,13 +139,8 @@ Popup html styles
     display: table;
 }
 
-#hiddenResetButtonPostitioning {
-  margin-top: 15px;
-}
-
-#buttonContainer {
-    margin: 35px 0 15px 0;
-}
+#hiddenResetButtonPostitioning { margin-top: 15px; }
+#buttonContainer { margin: 35px 0 15px 0; }
 
 /*============  Disable timer  ==============*/
 #disableTImeout {
@@ -185,9 +174,7 @@ Popup html styles
     font-family: 'Poppins-Regular', Sans-Serif;
 }
 
-#timeoutDuration {
-  accent-color: #00A8E8;
-}
+#timeoutDuration { accent-color: #00A8E8; }
 
 /*============  Button color pickers  ==============*/
 #modalHeader {
@@ -195,7 +182,8 @@ Popup html styles
     font-family: 'Poppins-Bold', Sans-Serif;
     margin: 0 auto;
     display: table;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    font-size: 15px;
 }
 
 #modalButtons label {
@@ -203,6 +191,7 @@ Popup html styles
     font-family: 'Poppins-Regular', Sans-Serif;
     margin-left: 10px;
     vertical-align: super;
+    font-size: 12px;
 }
 
 #modalButtons ul {
@@ -215,24 +204,13 @@ Popup html styles
     color: #ffffff;
     font-family: 'Poppins-Regular', Sans-Serif;
     font-size: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
-#continueButtonBgColor {
-    margin-left: 20px;
-}
-
-#continueButtonTextColor {
-    margin-left: 37px;
-}
-
-#restartButtonBgColor {
-    margin-left: 35px;
-}
-
-#restartButtonTextColor {
-    margin-left: 52px;   
-}
+#continueButtonBgColor { margin-left: 20px; }
+#continueButtonTextColor { margin-left: 33px; }
+#restartButtonBgColor { margin-left: 33px; }
+#restartButtonTextColor { margin-left: 47px; }
 
 #saveButtonStyling {
     padding: 5px 10px;
@@ -242,12 +220,11 @@ Popup html styles
     font-size: 12px;
     font-family: 'Poppins-Regular', Sans-Serif;
     background-color: #00A8E8;
-    /* margin-left: 35px; */
 }
 
 /*============  Corner radius styling  ==============*/
 #cornerRadiusContainer {
-    margin: 20px auto;
+    margin: 30px auto 0 auto;
     display: table;
 }
 
@@ -263,14 +240,19 @@ Popup html styles
     font-family: 'Poppins-Regular', Sans-Serif;
 }
 
-#cornerRadious {
-  accent-color: #00A8E8;
+#cornerRadius { accent-color: #00A8E8; }
+
+#radiusDisplay {
+    margin-left: 10px;
+    color: #ffffff;
+    position: relative;
+    bottom: 2px;
 }
 
 /*==============================================
-Reload button styles
+reload93451 button styles
 ==============================================*/
-#reload {
+#reload93451 {
   position: absolute;
   height: 100px;
   width: 100px;
@@ -280,7 +262,7 @@ Reload button styles
   background-color: none;
 }
 
-#reload.isVisible {
+#reload93451.isVisible {
   background-color: #3B3B3B;
   border: 3px solid #00A8E8 ;
 }
@@ -289,29 +271,29 @@ Reload button styles
 /*==============================================
 Modal styles
 ==============================================*/
-#timerWrapper {
-  position: fixed;
-  top: 50%;  
-  left: 50%; 
-  transform: translate(-50%, -50%); 
-  height: 390px;
-  width: 450px;
-  border-radius: 25px;
-  background: #ffffff;
-  z-index: 10;
-  display: none;
-  opacity: .9;
-  transition: all ease 1s;
+#timerWrapper93451 {
+    position: fixed;
+    top: 50%;  
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    height: 390px;
+    width: 450px;
+    border-radius: 25px;
+    background: #ffffff;
+    z-index: 10;
+    display: none;
+    opacity: .9;
+    transition: all ease 1s;
 }
 
-#eyesImage {
+#eyesImage93451 {
     height: 50px;
     width: 50px;
     margin: 20px auto 0 auto;
     display: table;
   }
 
-#headerCopy {
+#headerCopy93451 {
     margin: 10px auto 0 auto;
     display: table;
     font-size: 35px;
@@ -320,7 +302,7 @@ Modal styles
     z-index: 11;
 }
 
-#timer {
+#timer993451 {
     position: fixed;
     top: 50%;  
     left: 50%; 
@@ -332,29 +314,29 @@ Modal styles
     color: #3B3B3B;
     font-size: 110px;
     z-index: 11;
-  }
-
-#continue {
-  position: absolute;
-  width: 150px;
-  color: #fff;
-  background-color: #00A8E8;
-  border: none;
-  display: none;
-  font-size: 20px;
-  font-weight: 400; 
-  font-family: 'Poppins-Regular', sans-serif;
-  padding: 10px 20px;
-  margin: 20px auto;
-  cursor: pointer;
-  left: 200px;
-  right: 0;
-  bottom: 2%;
-  border-radius: 25px;
-  z-index: 11;
 }
 
-#restart {
+#continue993451 {
+    position: absolute;
+    width: 150px;
+    color: #fff;
+    background-color: #00A8E8;
+    border: none;
+    display: none;
+    font-size: 20px;
+    font-weight: 400; 
+    font-family: 'Poppins-Regular', sans-serif;
+    padding: 10px 20px;
+    margin: 20px auto;
+    cursor: pointer;
+    left: 200px;
+    right: 0;
+    bottom: 2%;
+    border-radius: 25px;
+    z-index: 11;
+}
+
+#restart993451 {
     position: absolute;
     width: 150px;
     color: #fff;
@@ -374,7 +356,7 @@ Modal styles
     z-index: 11;
   }
 
-#modalBackground {
+#modalBackground993451 {
     display: none;
     height: 100%;
     width: 100%;
@@ -388,19 +370,19 @@ Modal styles
     bottom: 0;
 }
 
-.fadeInModal {
-  animation: fadeInModal 1s;
-  -webkit-animation: fadeInModal 1s;
-  -moz-animation: fadeInModal 1s;
-  -o-animation: fadeInModal 1s;
-  -ms-animation: fadeInModal 1s;
+.fadeInModal993451 {
+    animation: fadeInModal993451 1s;
+    -webkit-animation: fadeInModal993451 1s;
+    -moz-animation: fadeInModal993451 1s;
+    -o-animation: fadeInModal993451 1s;
+    -ms-animation: fadeInModal993451 1s;
 }
 
 
 /*==============================================
 Animation
 ==============================================*/
-@keyframes fadeInModal {
+@keyframes fadeInModal993451 {
   0% {
       opacity: 0;
   }
@@ -410,7 +392,7 @@ Animation
   }
 }
 
-@-moz-keyframes fadeInModal {
+@-moz-keyframes fadeInModal993451 {
   0% {
       opacity: 0;
   }
@@ -420,7 +402,7 @@ Animation
   }
 }
 
-@-webkit-keyframes fadeInModal {
+@-webkit-keyframes fadeInModal993451 {
   0% {
       opacity: 0;
   }
@@ -430,7 +412,7 @@ Animation
   }
 }
 
-@-o-keyframes fadeInModal {
+@-o-keyframes fadeInModal993451 {
   0% {
       opacity: 0;
   }
@@ -440,7 +422,7 @@ Animation
   }
 }
 
-@-ms-keyframes fadeInModal {
+@-ms-keyframes fadeInModal993451 {
   0% {
       opacity: 0;
   }
