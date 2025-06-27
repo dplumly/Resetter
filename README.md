@@ -3,13 +3,22 @@ Chrome extension with two purposes.
 1. Timeout function. After X secs a modal appears with a 10 sec countdown.
 2. Invisible reset button to reload the page manually.
 
-The extension includes an input to save a URL using Chrome local storage in case you need it to go back to the root URL and not the current page. This works both with the invisible reset button and the timeout function. 
+<br>
+<br>
 
-Ability to change the shape and colors of the buttons and text in the buttons.
+<strong>Functionality</strong>
 
-Ability to change the amount of time before the timeout function happens. 
+- Ability to save a URL using Chrome local storage in case you need it to go back to the root URL and not the current page.
+  
+- Ability to change the shape of the buttons.
 
-Ability to toggle off the timeout function.
+- Ability to change the colors and the text of the buttons.
+
+- Ability to change the amount of time before the timeout function happens. 
+
+- Ability to toggle off the timeout function.
+
+- Ability to toggle on or off the hidden reset button to identify the location (upper left).
 
 
 <br>
