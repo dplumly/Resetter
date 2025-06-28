@@ -38,7 +38,7 @@ Here is the popup UI. There are a few things to do here.
 - Add a <strong>"Root"</strong> URL to ensure when the reload93451 happens manually or automatically it goes back to the root URL. 
 <br>
 
-<img src="./assets/popup.png">
+<img src="./assets/popup.png" width="50%" height="50%">
 <br>
 <br>
 
