@@ -141,61 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // Corner Radius Slider for Modal Buttons
 ////////////////////////////////////////////////////////////////////////////
 
-// Save slider state and send to content script
-// document.addEventListener('DOMContentLoaded', () => {
-//     let cornerRadiusSlider = document.getElementById('cornerRadius');
-    
-//     if (cornerRadiusSlider) {
-//         console.log("Corner radius roundness - Gate 1");
-
-//         // Load saved value when popup opens
-//         chrome.storage.local.get(['cornerRadius'], (result) => {
-//             if (result.cornerRadius !== undefined) {
-//                 cornerRadiusSlider.value = result.cornerRadius;
-//             }
-//         });
-
-//         // Listen for slider changes
-//         cornerRadiusSlider.addEventListener('input', () => {
-//             const radiusValue = parseInt(cornerRadiusSlider.value);
-//             console.log("Corner radius roundness - Gate 2, Value:", radiusValue);
-            
-//             // Save the value to storage
-//             chrome.storage.local.set({cornerRadius: radiusValue});
-            
-//             // Send message to content script
-//             chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-//                 chrome.tabs.sendMessage(tabs[0].id, {
-//                     type: "updateCornerRadius",
-//                     cornerRadius: radiusValue
-//                 }, function(response) {
-//                     if (chrome.runtime.lastError) {
-//                         console.log("Error sending message:", chrome.runtime.lastError);
-//                     } else {
-//                         console.log("Corner radius update sent to content.js");
-//                     }
-//                 });
-//             });
-//         });
-
-//         // Also trigger on 'change' for final value
-//         cornerRadiusSlider.addEventListener('change', () => {
-//             const radiusValue = parseInt(cornerRadiusSlider.value);
-//             chrome.storage.local.set({cornerRadius: radiusValue});
-//         });
-//     }
-// });
-
-
-
-
-
-
-
-////////////////////////////////////////////////////////////////////////////
-// Corner Radius Slider for Modal Buttons
-////////////////////////////////////////////////////////////////////////////
-
 document.addEventListener('DOMContentLoaded', () => {
     let cornerRadiusSlider = document.getElementById('cornerRadius');
     let radiusDisplay = document.getElementById('radiusDisplay');

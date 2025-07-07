@@ -37,6 +37,11 @@ h1, h2, h3, h4, h5, h6, p {
   font-family: Helvetica, Arial, Sans-Serif;
 }
 
+html {
+    background-color: #3B3B3B;
+    max-height: 600px;
+}
+
 /*==============================================
 Popup html styles
 ==============================================*/
