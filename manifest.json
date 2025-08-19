@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Resetter",
-  "description": "Timeout function with modal",
+  "description": "Timeout modal for kiosks to reset the page to a root URL after a period of inactivity.",
   "version": "1.0",
   "content_scripts": [
     {
@@ -27,8 +27,6 @@
     "default_popup": "popup.html"
     },
     "permissions": [
-      "tabs",
-      "activeTab",
       "storage"
   ]
 }

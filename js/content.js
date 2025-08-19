@@ -58,7 +58,6 @@ function reloadPageOrRedirect() {
             // Ensure the URL has a protocol
             let finalUrl = userInput.trim();
             
-            // If it doesn't start with http:// or https://, add https://
             if (!finalUrl.match(/^https?:\/\//i)) {
                 finalUrl = 'https://' + finalUrl;
             }
@@ -66,7 +65,7 @@ function reloadPageOrRedirect() {
             console.log("Redirecting to: " + finalUrl);
             window.location.href = finalUrl;
         } else {
-            console.log("No URL set, reload93451ing current page");
+            console.log("No URL set, reloading current page");
             window.location.reload(true); 
         }
     });
@@ -117,21 +116,21 @@ timeoutModal.appendChild(timer993451);
 document.body.appendChild(timeoutModal);
 document.body.appendChild(modalBackground);
 
-// Prevent click from triggering resetTimer
+// Restart button reloads page or redirects
 restartButton.addEventListener('click', (event) => {
     event.stopPropagation(); 
-    reload93451PageOrRedirect();
+    reloadPageOrRedirect();
 });
 
 // Activity that keeps the page live
 function setup() {
-    window.addEventListener("click", (event) => resettimer993451(event), false);
-    window.addEventListener("mousedown", (event) => resettimer993451(event), false);
-    window.addEventListener("keypress", (event) => resettimer993451(event), false);
-    window.addEventListener("DOMMouseScroll", (event) => resettimer993451(event), false);
-    window.addEventListener("mousewheel", (event) => resettimer993451(event), false);
-    window.addEventListener("touchmove", (event) => resettimer993451(event), false);
-    window.addEventListener("MSPointerMove", (event) => resettimer993451(event), false);
+    window.addEventListener("click", resetTimer, false);
+    window.addEventListener("mousedown", resetTimer, false);
+    window.addEventListener("keypress", resetTimer, false);
+    window.addEventListener("DOMMouseScroll", resetTimer, false);
+    window.addEventListener("mousewheel", resetTimer, false);
+    window.addEventListener("touchmove", resetTimer, false);
+    window.addEventListener("MSPointerMove", resetTimer, false);
     startTimer();
     console.log("Setup function");
 }
@@ -160,13 +159,11 @@ function updateButtonCornerRadius(radiusValue) {
     }
 }
 
-
 // Function to update timeout duration
 function updateTimeoutDuration(durationSeconds) {
-    timeOutTotalTime = durationSeconds * 1000; // Convert seconds to milliseconds
+    timeOutTotalTime = durationSeconds * 1000; 
     console.log(`Updated timeout duration to ${durationSeconds} seconds (${timeOutTotalTime}ms)`);
     
-    // If timer is currently running, restart it with new duration
     if (!timeoutDisabled) {
         clearTimeout(timeoutID);
         startTimer();
@@ -178,18 +175,15 @@ function handleTimeoutToggle(disabled) {
     timeoutDisabled = disabled;
     
     if (disabled) {
-        // Clear any existing timers
         clearTimeout(timeoutID);
         clearInterval(intervalId);
         
-        // Hide the modal if it's showing
         timeoutModal.style.display = 'none';
         timer993451.style.display = 'none';
         modalBackground.style.display = 'none';
         
         console.log("Timeout disabled - timers cleared");
     } else {
-        // Re-enable timeout by starting the timer
         startTimer();
         console.log("Timeout enabled - timer started");
     }
@@ -197,10 +191,8 @@ function handleTimeoutToggle(disabled) {
 
 // Initialize timeout based on stored setting
 chrome.storage.local.get(['disableTimeout', 'buttonStyling', 'cornerRadius', 'timeoutDuration'], (result) => {
-    // Default to false (timeout enabled) if no setting exists
     timeoutDisabled = result.disableTimeout === true;
     
-    // Apply button styling from storage or use defaults
     const styling = result.buttonStyling || {
         continueBgColor: '#007bff',
         continueTextColor: '#ffffff',
@@ -209,13 +201,11 @@ chrome.storage.local.get(['disableTimeout', 'buttonStyling', 'cornerRadius', 'ti
     };
     updateButtonStyling(styling);
     
-    // Apply saved corner radius
     const savedRadius = result.cornerRadius || 0;
     updateButtonCornerRadius(savedRadius);
     
-    // Apply saved timeout duration (default 60 seconds)
     const savedDuration = result.timeoutDuration || 60;
-    timeOutTotalTime = savedDuration * 1000; // Convert to milliseconds
+    timeOutTotalTime = savedDuration * 1000; 
     console.log(`Loaded timeout duration: ${savedDuration} seconds`);
 
     if (!timeoutDisabled) {
@@ -251,7 +241,6 @@ function resetTimer(event) {
     clearInterval(intervalId);
     clearTimeout(timeoutID);
     
-    // Only restart timer if timeout is not disabled
     if (!timeoutDisabled) {
         startTimer();
     }
@@ -268,7 +257,6 @@ function goInactive() {
     timeLeft = 10;  
   
     intervalId = setInterval(() => {
-        // Display the elements - Set them here to make sure the counter displays on the first interval 
         timeoutModal.style.display = 'block';
         timer993451.style.display = 'table';
         continueButton.style.display = 'block';
