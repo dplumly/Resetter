@@ -39,12 +39,68 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         console.log("Timeout duration update received:", request.timeoutDuration);
         updateTimeoutDuration(request.timeoutDuration);
     }
+    
+    // Handle homepage status check
+    if (request.type === "checkHomepageStatus") {
+        console.log("Homepage status check received");
+        checkAndUpdateTimeoutStatus();
+    }
 });
 
 // reload page when the hidden button is clicked
 document.getElementById('reload93451').addEventListener('click', () => {
     reloadPageOrRedirect();
 });
+
+////////////////////////////////////////////////////////////////////////////
+// Function to check if current page is homepage and update timeout status
+////////////////////////////////////////////////////////////////////////////
+function normalizeUrl(url) {
+    // Remove protocol
+    url = url.replace(/^https?:\/\//, '');
+    // Remove www prefix
+    url = url.replace(/^www\./, '');
+    // Remove trailing slash
+    url = url.replace(/\/$/, '');
+    // Convert to lowercase
+    return url.toLowerCase();
+}
+
+function isCurrentPageHomepage(storedHomepage) {
+    if (!storedHomepage) return false;
+    
+    const currentUrl = normalizeUrl(window.location.href);
+    const homepageUrl = normalizeUrl(storedHomepage);
+    
+    console.log("Comparing URLs:", currentUrl, "vs", homepageUrl);
+    
+    // Check if current URL matches homepage URL or is the root of the domain
+    return currentUrl === homepageUrl || currentUrl.startsWith(homepageUrl + '/') || currentUrl === homepageUrl.split('/')[0];
+}
+
+function checkAndUpdateTimeoutStatus() {
+    chrome.storage.local.get(['homepageUrl', 'disableTimeout'], (result) => {
+        const storedHomepage = result.homepageUrl;
+        const globalDisable = result.disableTimeout === true;
+        
+        console.log("Homepage settings - storedHomepage:", storedHomepage);
+        
+        if (globalDisable) {
+            console.log("Timeout globally disabled");
+            handleTimeoutToggle(true);
+            return;
+        }
+        
+        // If there's a homepage URL set, check if current page matches
+        if (storedHomepage && isCurrentPageHomepage(storedHomepage)) {
+            console.log("Current page is homepage - disabling timeout");
+            handleTimeoutToggle(true);
+        } else {
+            console.log("Current page is not homepage or no homepage URL set - enabling timeout");
+            handleTimeoutToggle(false);
+        }
+    });
+}
 
 ////////////////////////////////////////////////////////////////////////////
 // Function to reload page or redirect based on user input
@@ -189,9 +245,16 @@ function handleTimeoutToggle(disabled) {
     }
 }
 
-// Initialize timeout based on stored setting
-chrome.storage.local.get(['disableTimeout', 'buttonStyling', 'cornerRadius', 'timeoutDuration'], (result) => {
-    timeoutDisabled = result.disableTimeout === true;
+// Initialize timeout based on stored setting and homepage check
+chrome.storage.local.get(['disableTimeout', 'buttonStyling', 'cornerRadius', 'timeoutDuration', 'homepageUrl'], (result) => {
+    const globalDisabled = result.disableTimeout === true;
+    const storedHomepage = result.homepageUrl;
+    
+    // Check if timeout should be disabled based on homepage setting
+    const onHomepage = storedHomepage && isCurrentPageHomepage(storedHomepage);
+    timeoutDisabled = globalDisabled || onHomepage;
+    
+    console.log("Initial timeout check - globalDisabled:", globalDisabled, "onHomepage:", onHomepage, "final disabled:", timeoutDisabled);
     
     const styling = result.buttonStyling || {
         continueBgColor: '#007bff',
@@ -211,7 +274,7 @@ chrome.storage.local.get(['disableTimeout', 'buttonStyling', 'cornerRadius', 'ti
     if (!timeoutDisabled) {
         setup();
     } else {
-        console.log("Timeout is disabled by user setting.");
+        console.log("Timeout is disabled by user setting or homepage exclusion.");
     }
 });
 

@@ -34,7 +34,7 @@ Fonts for popup.html
   }
 
 h1, h2, h3, h4, h5, h6, p {
-    font-family: Helvetica, Arial, Sans-Serif;
+    font-family: 'Poppins-Regular', Sans-Serif;
 }
 
 body {
@@ -48,7 +48,7 @@ Popup html styles
     height: auto;
     width: 450px;
     margin: 0 auto;
-    padding: 15px 30px;
+    /* padding: 15px 30px; */
     background-color: #3B3B3B;
     max-height: 800px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
@@ -95,19 +95,80 @@ Popup html styles
 
 #storedHomepage { color: #FFB400; }
 
+#hiddenDisableContainer, #saveRootContainer {
+    padding: 15px 30px;
+
+}
+/*==============================================
+Home page dont run
+==============================================*/
+#modalButtonsBackground {
+    background-color: #505050;
+    padding: 15px 30px;
+}
+
+#homepageExclusionContainer {
+    display: table;
+    margin: 0 auto;
+    color: #ffffff;
+}
+#homepageExclusionContainer  label {
+    vertical-align: super;
+    color: #ffffff;
+    font-family: 'Poppins-Regular', Sans-Serif;
+    font-size: 12px;
+}
+
+#homepageExclusionContainer h3 {
+    font-family: 'Poppins-Light', Sans-Serif;
+}
+
+#disableOnHomepage {
+    zoom: 2;
+}
+
+#homepageUrlField {
+    margin-bottom: 10px;
+}
+
+#homepageDisplay {
+    font-family: 'Poppins-Light', Sans-Serif;
+    margin: 0;
+}
+
+#homepageUrlField {
+    padding: 5px 10px;
+    margin: 5px 5px 5px 0;
+    background-color: #6D6D6D !important;
+    color: #ffffff;
+    border-style: none;
+    border-radius: 5px;
+    width: 265px;
+}
+
+#storedHomepageUrl { color: #FFB400; }
+
+
+
+/*============  Buttons  ==============*/
+
+#homepageExclusionContainerBackground {
+    background-color: #505050;
+    padding: 15px 30px;
+}
 
 ::placeholder {
     color:#ffffff;
     font-family: 'Poppins-Light', Sans-Serif;
-    opacity: 1; /* Firefox */
+    opacity: .4; /* Firefox */
   }
 
-#saveButton, #removeButton {
+#saveButton, #removeButton, #saveHomepageButton, #removeHomepageButton {
     width: 72px;
     height: 25px;
 }
 
-#saveButton, #removeButton, #toggleVisibility {
+#saveButton, #removeButton, #toggleVisibility, #saveHomepageButton, #removeHomepageButton {
     padding: 5px 10px;
     margin: 5px 15px 5px 0;
     cursor: pointer;
@@ -117,19 +178,18 @@ Popup html styles
     font-family: 'Poppins-Regular', Sans-Serif;
 }
 
-/*============  Buttons  ==============*/
 #toggleVisibility {
     background-color: #00A8E8;
     color: #3B3B3B;
 }
 
-#saveButton {
+#saveButton, #saveHomepageButton {
     background-color: #00A8E8;
     color: #3B3B3B;
     margin-top: 10px;
 }
 
-#removeButton {
+#removeButton, #removeHomepageButton {
     background-color: #FF6B6B;
     color: #3B3B3B;
     margin-top: 10px;
@@ -248,8 +308,10 @@ Popup html styles
     margin-left: 10px;
     color: #ffffff;
     position: relative;
-    bottom: 2px;
+     font-family: 'Poppins-Light', Sans-Serif;
+    font-size: 12px;
 }
+
 
 /*==============================================
 reload93451 button styles

@@ -29,6 +29,13 @@ document.getElementById('removeButton').addEventListener('click', () => {
         document.getElementById('inputStatus').textContent = 'Input removed';
         document.getElementById('storedHomepage').textContent = '';
         document.getElementById('userInputField').value = '';
+        
+        // Send message to content script to check if timeout should be re-enabled
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, {
+                type: "checkHomepageStatus"
+            });
+        });
     });
 });
 
@@ -39,6 +46,63 @@ chrome.storage.local.get('userInput', (result) => {
         document.getElementById('storedHomepage').textContent = userInput;
     } else {
         document.getElementById('inputStatus').textContent = 'No input stored';
+    }
+});
+
+////////////////////////////////////////////////////////////////////////////
+// Homepage Exclusion URL Management
+////////////////////////////////////////////////////////////////////////////
+
+// Save homepage URL
+document.getElementById('saveHomepageButton').addEventListener('click', () => {
+    let homepageUrl = document.getElementById('homepageUrlField').value.trim();
+    console.log('Homepage save button clicked');
+
+    if (homepageUrl !== '') {
+        chrome.storage.local.set({ 'homepageUrl': homepageUrl }, () => {
+            console.log('Homepage URL saved successfully: ' + homepageUrl);
+            document.getElementById('storedHomepageUrl').textContent = homepageUrl;
+            document.getElementById('homepageInputStatus').textContent = 'Homepage URL saved successfully.';
+            
+            // Send message to content script to check if timeout should be disabled
+            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                chrome.tabs.sendMessage(tabs[0].id, {
+                    type: "checkHomepageStatus"
+                });
+            });
+        });
+    } else {
+        document.getElementById('homepageInputStatus').textContent = 'Please enter a homepage URL.';
+    }
+});
+
+// Remove homepage URL
+document.getElementById('removeHomepageButton').addEventListener('click', () => {
+    console.log('Homepage remove button clicked');
+
+    chrome.storage.local.remove('homepageUrl', () => {
+        console.log('Homepage URL removed successfully');
+        document.getElementById('homepageInputStatus').textContent = 'Homepage URL removed';
+        document.getElementById('storedHomepageUrl').textContent = '';
+        document.getElementById('homepageUrlField').value = '';
+        
+        // Send message to content script to check if timeout should be re-enabled
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, {
+                type: "checkHomepageStatus"
+            });
+        });
+    });
+});
+
+// Load homepage URL on popup open
+chrome.storage.local.get('homepageUrl', (result) => {
+    let homepageUrl = result.homepageUrl;
+    if (homepageUrl) {
+        document.getElementById('storedHomepageUrl').textContent = homepageUrl;
+        document.getElementById('homepageUrlField').value = homepageUrl;
+    } else {
+        document.getElementById('homepageInputStatus').textContent = 'No homepage URL stored';
     }
 });
 
@@ -136,61 +200,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-
-////////////////////////////////////////////////////////////////////////////
-// Corner Radius Slider for Modal Buttons
-////////////////////////////////////////////////////////////////////////////
-
-// Save slider state and send to content script
-// document.addEventListener('DOMContentLoaded', () => {
-//     let cornerRadiusSlider = document.getElementById('cornerRadius');
-    
-//     if (cornerRadiusSlider) {
-//         console.log("Corner radius roundness - Gate 1");
-
-//         // Load saved value when popup opens
-//         chrome.storage.local.get(['cornerRadius'], (result) => {
-//             if (result.cornerRadius !== undefined) {
-//                 cornerRadiusSlider.value = result.cornerRadius;
-//             }
-//         });
-
-//         // Listen for slider changes
-//         cornerRadiusSlider.addEventListener('input', () => {
-//             const radiusValue = parseInt(cornerRadiusSlider.value);
-//             console.log("Corner radius roundness - Gate 2, Value:", radiusValue);
-            
-//             // Save the value to storage
-//             chrome.storage.local.set({cornerRadius: radiusValue});
-            
-//             // Send message to content script
-//             chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-//                 chrome.tabs.sendMessage(tabs[0].id, {
-//                     type: "updateCornerRadius",
-//                     cornerRadius: radiusValue
-//                 }, function(response) {
-//                     if (chrome.runtime.lastError) {
-//                         console.log("Error sending message:", chrome.runtime.lastError);
-//                     } else {
-//                         console.log("Corner radius update sent to content.js");
-//                     }
-//                 });
-//             });
-//         });
-
-//         // Also trigger on 'change' for final value
-//         cornerRadiusSlider.addEventListener('change', () => {
-//             const radiusValue = parseInt(cornerRadiusSlider.value);
-//             chrome.storage.local.set({cornerRadius: radiusValue});
-//         });
-//     }
-// });
-
-
-
-
-
-
 
 ////////////////////////////////////////////////////////////////////////////
 // Corner Radius Slider for Modal Buttons

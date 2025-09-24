@@ -8,17 +8,35 @@
 
 <body>
     <div id="popUpContainer">
-        <h1 id="extensionName">Resetter</h1>
-
         <div id="saveRootContainer">
-            <input type="text" id="userInputField" placeholder="Enter Root URL">
+            <h1 id="extensionName">Resetter</h1>
+
+            <input type="text" id="userInputField" placeholder="Enter Redirect URL">
             <br>
             <button id="removeButton">Remove</button>
             <button id="saveButton">Save</button>
             
             <p id="inputStatus"></p>
-            <p id="homepage">Stored Homepage: <span id="storedHomepage"></span></p>
+            <p id="homepage">Stored Redirect URL: <span id="storedHomepage"></span></p>
         </div>
+
+        
+        <div id="homepageExclusionContainerBackground">
+            <div id="homepageExclusionContainer">
+                <h3>Homepage Exclusion</h3>
+                <p>Enter a URL to not run timeout on:</p>
+                <input type="text" id="homepageUrlField" placeholder="Enter Homepage URL (where timeout won't run)">
+                <br>
+                <button id="removeHomepageButton">Remove</button>
+                <button id="saveHomepageButton">Save</button>
+                
+                <p id="homepageInputStatus"></p>
+                <p id="homepageDisplay">Homepage URL: <span id="storedHomepageUrl"></span></p>
+            </div>
+        </div>
+
+
+
         
         <div id="hiddenDisableContainer">
             <div id="buttonContainer">
@@ -33,33 +51,36 @@
         </div>
     
         <!-- Modal Button Styling Settings -->
-        <div id="modalButtons">
-            <h3 id="modalHeader">Modal Button Styling</h3>
 
-            <ul>
-                <li class="colorPickers">
-                    <label for="continueButtonBgColor">Continue Button Background:</label>
-                    <input type="color" id="continueButtonBgColor" value="#00A8E8" />
-                </li>
-                <li class="colorPickers">
-                    <label for="continueButtonTextColor">Continue Button Text Color:</label>
-                    <input type="color" id="continueButtonTextColor" value="#ffffff" />
-                </li>
-                <li class="colorPickers">
-                    <label for="restartButtonBgColor">Restart Button Background:</label>
-                    <input type="color" id="restartButtonBgColor" value="#FF6B6B" />
-                </li>
-                <li class="colorPickers">
-                    <label for="restartButtonTextColor">Restart Button Text Color:</label>
-                    <input type="color" id="restartButtonTextColor" value="#ffffff" />
-                </li>
-                <button id="saveButtonStyling">Save Button Colors</button>
-            </ul>
-            
-            <div id="cornerRadiusContainer">
-                <input type="range" id="cornerRadius" name="roundness" min="0" max="50" />
-                <label for="roundness">Button roundness</label>
-                <span id="radiusDisplay">0px</span>
+        <div id="modalButtonsBackground">
+            <div id="modalButtons">
+                <h3 id="modalHeader">Modal Button Styling</h3>
+
+                <ul>
+                    <li class="colorPickers">
+                        <label for="continueButtonBgColor">Continue Button Background:</label>
+                        <input type="color" id="continueButtonBgColor" value="#00A8E8" />
+                    </li>
+                    <li class="colorPickers">
+                        <label for="continueButtonTextColor">Continue Button Text Color:</label>
+                        <input type="color" id="continueButtonTextColor" value="#ffffff" />
+                    </li>
+                    <li class="colorPickers">
+                        <label for="restartButtonBgColor">Restart Button Background:</label>
+                        <input type="color" id="restartButtonBgColor" value="#FF6B6B" />
+                    </li>
+                    <li class="colorPickers">
+                        <label for="restartButtonTextColor">Restart Button Text Color:</label>
+                        <input type="color" id="restartButtonTextColor" value="#ffffff" />
+                    </li>
+                    <button id="saveButtonStyling">Save Button Colors</button>
+                </ul>
+                
+                <div id="cornerRadiusContainer">
+                    <input type="range" id="cornerRadius" name="roundness" min="0" max="50" />
+                    <label for="roundness">Button roundness</label>
+                    <span id="radiusDisplay">0px</span>
+                </div>
             </div>
         </div>
     </div>
