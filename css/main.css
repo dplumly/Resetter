@@ -41,6 +41,16 @@ body {
     margin: 0;
 }
 
+/* div#timerWrapper93451.fadeInModal993451 {
+    zoom: 3;
+} */
+
+
+/* Sizing for 4k monitors */
+div#timerWrapper93451 {
+    zoom: 3;
+}
+
 /*==============================================
 Popup html styles
 ==============================================*/

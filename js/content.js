@@ -3,167 +3,152 @@ console.log("Content script loaded");
 ////////////////////////////////////////////////////////////////////////////
 // Hidden reload button 
 ////////////////////////////////////////////////////////////////////////////
-
 const hiddenResetButton = document.createElement("div");
 hiddenResetButton.setAttribute("id", "reload93451");
 document.body.append(hiddenResetButton);
 
-// Function to visually see the reload button
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function(request) {
     if (request.message) {
         const makeVisible = document.getElementById('reload93451');
         makeVisible.classList.toggle('isVisible');
         console.log('Reveal!');
     }
-    
-    // Handle timeout enable/disable messages
+
     if (request.type === "toggleTimeout") {
-        console.log("Timeout toggle received:", request.disabled);
         handleTimeoutToggle(request.disabled);
     }
-    
-    // Handle button styling updates
+
     if (request.type === "updateButtonStyling") {
-        console.log("Button styling update received:", request.styling);
         updateButtonStyling(request.styling);
     }
-    
-    // Handle corner radius updates
+
     if (request.type === "updateCornerRadius") {
-        console.log("Corner radius update received:", request.cornerRadius);
         updateButtonCornerRadius(request.cornerRadius);
     }
-    
-    // Handle timeout duration updates
+
     if (request.type === "updateTimeoutDuration") {
-        console.log("Timeout duration update received:", request.timeoutDuration);
         updateTimeoutDuration(request.timeoutDuration);
     }
-    
-    // Handle homepage status check
+
     if (request.type === "checkHomepageStatus") {
-        console.log("Homepage status check received");
         checkAndUpdateTimeoutStatus();
     }
 });
 
-// reload page when the hidden button is clicked
 document.getElementById('reload93451').addEventListener('click', () => {
     reloadPageOrRedirect();
 });
 
 ////////////////////////////////////////////////////////////////////////////
-// Function to check if current page is homepage and update timeout status
+// URL Change Monitoring
 ////////////////////////////////////////////////////////////////////////////
-function normalizeUrl(url) {
-    // Remove protocol
-    url = url.replace(/^https?:\/\//, '');
-    // Remove www prefix
-    url = url.replace(/^www\./, '');
-    // Remove trailing slash
-    url = url.replace(/\/$/, '');
-    // Convert to lowercase
-    return url.toLowerCase();
-}
+let currentUrl = window.location.href;
 
+function startURLMonitoring() {
+    setInterval(() => {
+        const newUrl = window.location.href;
+        if (currentUrl !== newUrl) {
+            console.log("URL changed:", currentUrl, "→", newUrl);
+            currentUrl = newUrl;
+            setTimeout(() => checkAndUpdateTimeoutStatus(), 500);
+        }
+    }, 250);
+}
+startURLMonitoring();
+
+////////////////////////////////////////////////////////////////////////////
+// Homepage check
+////////////////////////////////////////////////////////////////////////////
 function isCurrentPageHomepage(storedHomepage) {
     if (!storedHomepage) return false;
-    
-    const currentUrl = normalizeUrl(window.location.href);
-    const homepageUrl = normalizeUrl(storedHomepage);
-    
-    console.log("Comparing URLs:", currentUrl, "vs", homepageUrl);
-    
-    // Check if current URL matches homepage URL or is the root of the domain
-    return currentUrl === homepageUrl || currentUrl.startsWith(homepageUrl + '/') || currentUrl === homepageUrl.split('/')[0];
+
+    const currentUrl = window.location.href;
+    const homepageUrl = storedHomepage.trim();
+
+    console.log("=== EXACT URL COMPARISON ===");
+    console.log("Current URL:", currentUrl);
+    console.log("Homepage URL:", homepageUrl);
+    console.log("Identical?", currentUrl === homepageUrl);
+    console.log("===========================");
+
+    return currentUrl === homepageUrl; // strict match
 }
 
 function checkAndUpdateTimeoutStatus() {
     chrome.storage.local.get(['homepageUrl', 'disableTimeout'], (result) => {
         const storedHomepage = result.homepageUrl;
         const globalDisable = result.disableTimeout === true;
-        
-        console.log("Homepage settings - storedHomepage:", storedHomepage);
-        
+
         if (globalDisable) {
-            console.log("Timeout globally disabled");
             handleTimeoutToggle(true);
             return;
         }
-        
-        // If there's a homepage URL set, check if current page matches
+
         if (storedHomepage && isCurrentPageHomepage(storedHomepage)) {
-            console.log("Current page is homepage - disabling timeout");
+            console.log("Current page IS homepage → disable timeout");
             handleTimeoutToggle(true);
         } else {
-            console.log("Current page is not homepage or no homepage URL set - enabling timeout");
+            console.log("Current page is NOT homepage → enable timeout");
             handleTimeoutToggle(false);
         }
     });
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// Function to reload page or redirect based on user input
+// Reload or redirect
 ////////////////////////////////////////////////////////////////////////////
 function reloadPageOrRedirect() {
     chrome.storage.local.get(["userInput"], (result) => {
         let userInput = result.userInput;
-        console.log("Root URL: " + userInput);
 
         if (userInput && userInput.trim() !== '') {
-            // Ensure the URL has a protocol
             let finalUrl = userInput.trim();
-            
             if (!finalUrl.match(/^https?:\/\//i)) {
                 finalUrl = 'https://' + finalUrl;
             }
-            
-            console.log("Redirecting to: " + finalUrl);
+            console.log("Redirecting to:", finalUrl);
             window.location.href = finalUrl;
         } else {
-            console.log("No URL set, reloading current page");
-            window.location.reload(true); 
+            console.log("Reloading current page");
+            window.location.reload(true);
         }
     });
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// Timeout functions to reset page after 'X' amount of seconds
+// Timeout logic
 ////////////////////////////////////////////////////////////////////////////
-
 let timeoutID;
 let timeLeft = 10;
 let timeOutTotalTime = 60000;
 let intervalId = null;
 let timeoutDisabled = false;
 
-// Creating modal elements
 const modalBackground = document.createElement("div");
-modalBackground.setAttribute("id", "modalBackground993451");
+modalBackground.id = "modalBackground993451";
 
 const timeoutModal = document.createElement("div");
-timeoutModal.setAttribute("id", "timerWrapper93451");
+timeoutModal.id = "timerWrapper93451";
 
 const copy = document.createElement("h3");
-copy.setAttribute("id", "headerCopy93451");
+copy.id = "headerCopy93451";
 copy.textContent = "Are you still there?";
 
 const timer993451 = document.createElement("span");
-timer993451.setAttribute("id", "timer993451");
+timer993451.id = "timer993451";
 
 const continueButton = document.createElement("button");
-continueButton.setAttribute("id", "continue993451");
+continueButton.id = "continue993451";
 continueButton.textContent = 'Continue';
 
 const restartButton = document.createElement("button");
-restartButton.setAttribute("id", "restart993451");
+restartButton.id = "restart993451";
 restartButton.textContent = 'Restart';
 
 const imgEyes = document.createElement('img');
-imgEyes.setAttribute("id", "eyesImage93451");
+imgEyes.id = "eyesImage93451";
 imgEyes.src = chrome.runtime.getURL('img/eyes.gif');
 
-// Append modal elements
 timeoutModal.appendChild(imgEyes);
 timeoutModal.appendChild(copy);
 timeoutModal.appendChild(continueButton);
@@ -172,26 +157,43 @@ timeoutModal.appendChild(timer993451);
 document.body.appendChild(timeoutModal);
 document.body.appendChild(modalBackground);
 
-// Restart button reloads page or redirects
 restartButton.addEventListener('click', (event) => {
     event.stopPropagation(); 
     reloadPageOrRedirect();
 });
 
-// Activity that keeps the page live
+continueButton.addEventListener('click', (event) => {
+    event.stopPropagation();
+
+    // Hide modal
+    timeoutModal.style.display = 'none';
+    modalBackground.style.display = 'none';
+    timer993451.style.display = 'none';
+    continueButton.style.display = 'none';
+    restartButton.style.display = 'none';
+
+    // Reset timers
+    clearInterval(intervalId);
+    clearTimeout(timeoutID);
+
+    if (!timeoutDisabled) {
+        startTimer();  // start a fresh timeout
+    }
+
+    console.log("Continue clicked → timer reset");
+});
+
+
+let eventListenersAdded = false;
 function setup() {
-    window.addEventListener("click", resetTimer, false);
-    window.addEventListener("mousedown", resetTimer, false);
-    window.addEventListener("keypress", resetTimer, false);
-    window.addEventListener("DOMMouseScroll", resetTimer, false);
-    window.addEventListener("mousewheel", resetTimer, false);
-    window.addEventListener("touchmove", resetTimer, false);
-    window.addEventListener("MSPointerMove", resetTimer, false);
+    if (!eventListenersAdded) {
+        ["click","mousedown","keypress","DOMMouseScroll","mousewheel","touchmove","MSPointerMove"]
+            .forEach(evt => window.addEventListener(evt, resetTimer, false));
+        eventListenersAdded = true;
+    }
     startTimer();
-    console.log("Setup function");
 }
 
-// Function to update button styling
 function updateButtonStyling(styling) {
     continueButton.style.backgroundColor = styling.continueBgColor;
     continueButton.style.color = styling.continueTextColor;
@@ -199,63 +201,43 @@ function updateButtonStyling(styling) {
     restartButton.style.color = styling.restartTextColor;
 }
 
-// Function to update button corner radius
 function updateButtonCornerRadius(radiusValue) {
-    const continueBtn = document.getElementById('continue993451');
-    const restartBtn = document.getElementById('restart993451');
-    
-    if (continueBtn) {
-        continueBtn.style.borderRadius = `${radiusValue}px`;
-        console.log(`Updated continue button border radius to ${radiusValue}px`);
-    }
-    
-    if (restartBtn) {
-        restartBtn.style.borderRadius = `${radiusValue}px`;
-        console.log(`Updated restart button border radius to ${radiusValue}px`);
-    }
+    continueButton.style.borderRadius = `${radiusValue}px`;
+    restartButton.style.borderRadius = `${radiusValue}px`;
 }
 
-// Function to update timeout duration
 function updateTimeoutDuration(durationSeconds) {
     timeOutTotalTime = durationSeconds * 1000; 
-    console.log(`Updated timeout duration to ${durationSeconds} seconds (${timeOutTotalTime}ms)`);
-    
     if (!timeoutDisabled) {
         clearTimeout(timeoutID);
         startTimer();
     }
 }
 
-// Function to handle timeout toggle
 function handleTimeoutToggle(disabled) {
     timeoutDisabled = disabled;
-    
     if (disabled) {
         clearTimeout(timeoutID);
         clearInterval(intervalId);
-        
+
         timeoutModal.style.display = 'none';
-        timer993451.style.display = 'none';
         modalBackground.style.display = 'none';
-        
-        console.log("Timeout disabled - timers cleared");
+        timer993451.style.display = 'none';
+        continueButton.style.display = 'none';
+        restartButton.style.display = 'none';
     } else {
         startTimer();
-        console.log("Timeout enabled - timer started");
     }
 }
 
-// Initialize timeout based on stored setting and homepage check
+
 chrome.storage.local.get(['disableTimeout', 'buttonStyling', 'cornerRadius', 'timeoutDuration', 'homepageUrl'], (result) => {
     const globalDisabled = result.disableTimeout === true;
     const storedHomepage = result.homepageUrl;
-    
-    // Check if timeout should be disabled based on homepage setting
+
     const onHomepage = storedHomepage && isCurrentPageHomepage(storedHomepage);
     timeoutDisabled = globalDisabled || onHomepage;
-    
-    console.log("Initial timeout check - globalDisabled:", globalDisabled, "onHomepage:", onHomepage, "final disabled:", timeoutDisabled);
-    
+
     const styling = result.buttonStyling || {
         continueBgColor: '#007bff',
         continueTextColor: '#ffffff',
@@ -263,76 +245,61 @@ chrome.storage.local.get(['disableTimeout', 'buttonStyling', 'cornerRadius', 'ti
         restartTextColor: '#ffffff'
     };
     updateButtonStyling(styling);
-    
-    const savedRadius = result.cornerRadius || 0;
-    updateButtonCornerRadius(savedRadius);
-    
+
+    updateButtonCornerRadius(result.cornerRadius || 0);
+
     const savedDuration = result.timeoutDuration || 60;
     timeOutTotalTime = savedDuration * 1000; 
-    console.log(`Loaded timeout duration: ${savedDuration} seconds`);
 
-    if (!timeoutDisabled) {
-        setup();
-    } else {
-        console.log("Timeout is disabled by user setting or homepage exclusion.");
-    }
+    if (!timeoutDisabled) setup();
 });
 
-// Main timeout function
 function startTimer() {
-    if (timeoutDisabled) {
-        console.log("Timer not started - timeout is disabled");
-        return;
-    }
-    
+    if (timeoutDisabled) return;
     timeoutID = setTimeout(goInactive, timeOutTotalTime);
-    console.log("StartTimer function");
 }
 
-// Clear modal and reset timer
 function resetTimer(event) {
-    if (event && event.target.id === 'restart993451') {
-        return; 
-    }
+    if (event && event.target.id === 'restart993451') return; 
 
+    // Hide modal + elements
     timeoutModal.style.display = 'none';
-    timer993451.style.display = 'none';
     modalBackground.style.display = 'none';
-
-    console.log("ResetTimer function");
+    timer993451.style.display = 'none';
+    continueButton.style.display = 'none';
+    restartButton.style.display = 'none';
 
     clearInterval(intervalId);
     clearTimeout(timeoutID);
-    
-    if (!timeoutDisabled) {
-        startTimer();
-    }
+
+    if (!timeoutDisabled) startTimer();
 }
+
 
 function goInactive() {
-    if (timeoutDisabled) {
-        console.log("goInactive called but timeout is disabled");
-        return;
-    }
-    
-    timer993451.style.display = 'table';
-    timeoutModal.classList.add('fadeInModal993451');
-    timeLeft = 10;  
-  
+    if (timeoutDisabled) return;
+
+    timeLeft = 10;
+
     intervalId = setInterval(() => {
         timeoutModal.style.display = 'block';
-        timer993451.style.display = 'table';
-        continueButton.style.display = 'block';
-        restartButton.style.display = 'block';
         modalBackground.style.display = 'block';
 
-        timer993451.innerHTML = String(timeLeft);
-        console.log("Countdown: " + timeLeft);
-        timeLeft--;
+        timer993451.style.display = 'inline-block';
+        continueButton.style.display = 'inline-block';
+        restartButton.style.display = 'inline-block';
 
-        if (timeLeft < 0) {
-            clearInterval(intervalId);
-            reloadPageOrRedirect();
+        timer993451.innerHTML = String(timeLeft);
+        console.log("Countdown:", timeLeft);
+
+        if (timeLeft <= 0) {
+            clearInterval(intervalId);   // stop countdown
+            reloadPageOrRedirect();      // redirect once
+            return;                      // exit so it doesn’t keep ticking
         }
+
+        timeLeft--;
     }, 1000);
 }
+
+
