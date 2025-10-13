@@ -1,4 +1,4 @@
-console.log('popup.js loaded');
+// console.log('popup.js loaded');
 
 ////////////////////////////////////////////////////////////////////////////
 // Saving data to chrome storage for setting the root URL so after reload93451 goes to current location or root
@@ -7,11 +7,11 @@ console.log('popup.js loaded');
 // Save Data to Storage:
 document.getElementById('saveButton').addEventListener('click', () => {
     let userInput = document.getElementById('userInputField').value.trim();
-    console.log('button saved clicked');
+    // console.log('button saved clicked');
 
     if (userInput !== '') {
         chrome.storage.local.set({ 'userInput': userInput }, () => {
-            console.log('Input saved successfully ' + userInput);
+            // console.log('Input saved successfully ' + userInput);
             document.getElementById('storedHomepage').textContent = userInput;
             document.getElementById('inputStatus').textContent = 'Input saved successfully.';
         });
@@ -22,7 +22,7 @@ document.getElementById('saveButton').addEventListener('click', () => {
 
 // Remove Data from Storage:
 document.getElementById('removeButton').addEventListener('click', () => {
-    console.log('button removed clicked');
+    // console.log('button removed clicked');
 
     chrome.storage.local.remove('userInput', () => {
         console.log('Input removed successfully');
@@ -56,11 +56,11 @@ chrome.storage.local.get('userInput', (result) => {
 // Save homepage URL
 document.getElementById('saveHomepageButton').addEventListener('click', () => {
     let homepageUrl = document.getElementById('homepageUrlField').value.trim();
-    console.log('Homepage save button clicked');
+    // console.log('Homepage save button clicked');
 
     if (homepageUrl !== '') {
         chrome.storage.local.set({ 'homepageUrl': homepageUrl }, () => {
-            console.log('Homepage URL saved successfully: ' + homepageUrl);
+            // console.log('Homepage URL saved successfully: ' + homepageUrl);
             document.getElementById('storedHomepageUrl').textContent = homepageUrl;
             document.getElementById('homepageInputStatus').textContent = 'Homepage URL saved successfully.';
             
@@ -78,10 +78,10 @@ document.getElementById('saveHomepageButton').addEventListener('click', () => {
 
 // Remove homepage URL
 document.getElementById('removeHomepageButton').addEventListener('click', () => {
-    console.log('Homepage remove button clicked');
+    // console.log('Homepage remove button clicked');
 
     chrome.storage.local.remove('homepageUrl', () => {
-        console.log('Homepage URL removed successfully');
+        // console.log('Homepage URL removed successfully');
         document.getElementById('homepageInputStatus').textContent = 'Homepage URL removed';
         document.getElementById('storedHomepageUrl').textContent = '';
         document.getElementById('homepageUrlField').value = '';
@@ -125,7 +125,7 @@ document.getElementById('saveButtonStyling').addEventListener('click', () => {
     };
     
     chrome.storage.local.set({ 'buttonStyling': buttonStyling }, () => {
-        console.log('Button styling saved:', buttonStyling);
+        // console.log('Button styling saved:', buttonStyling);
         
         // Send message to content script to update button styling
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -133,7 +133,7 @@ document.getElementById('saveButtonStyling').addEventListener('click', () => {
                 type: "updateButtonStyling",
                 styling: buttonStyling
             }, function(response) {
-                console.log("Button styling update message sent to content script");
+                // console.log("Button styling update message sent to content script");
             });
         });
     });
@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let timeoutValueDisplay = document.getElementById('timeoutValue');
     
     if (timeoutDurationSlider && timeoutValueDisplay) {
-        console.log("Timeout duration slider - Gate 1");
+        // console.log("Timeout duration slider - Gate 1");
 
         // Load saved value when popup opens
         chrome.storage.local.get(['timeoutDuration'], (result) => {
@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
         timeoutDurationSlider.addEventListener('input', () => {
             const durationValue = parseInt(timeoutDurationSlider.value);
             timeoutValueDisplay.textContent = durationValue;
-            console.log("Timeout duration - Gate 2, Value:", durationValue);
+            // console.log("Timeout duration - Gate 2, Value:", durationValue);
             
             // Save the value to storage
             chrome.storage.local.set({timeoutDuration: durationValue});
@@ -185,9 +185,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     timeoutDuration: durationValue
                 }, function(response) {
                     if (chrome.runtime.lastError) {
-                        console.log("Error sending timeout duration message:", chrome.runtime.lastError);
+                        // console.log("Error sending timeout duration message:", chrome.runtime.lastError);
                     } else {
-                        console.log("Timeout duration update sent to content.js");
+                        // console.log("Timeout duration update sent to content.js");
                     }
                 });
             });
@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let radiusDisplay = document.getElementById('radiusDisplay');
     
     if (cornerRadiusSlider && radiusDisplay) {
-        console.log("Corner radius roundness - Gate 1");
+        // console.log("Corner radius roundness - Gate 1");
 
         // Load saved value when popup opens
         chrome.storage.local.get(['cornerRadius'], (result) => {
@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cornerRadiusSlider.addEventListener('input', () => {
             const radiusValue = parseInt(cornerRadiusSlider.value);
             radiusDisplay.textContent = `${radiusValue}px`;
-            console.log("Corner radius roundness - Gate 2, Value:", radiusValue);
+            // console.log("Corner radius roundness - Gate 2, Value:", radiusValue);
             
             chrome.storage.local.set({cornerRadius: radiusValue});
             
@@ -250,15 +250,15 @@ document.addEventListener('DOMContentLoaded', () => {
 // Hidden reload93451 Button Visibility
 document.addEventListener('DOMContentLoaded', () => {
     let sendMessageBtn = document.getElementById('toggleVisibility');
-    console.log("Hidden button visibility - Gate 1");
+    // console.log("Hidden button visibility - Gate 1");
 
     sendMessageBtn.addEventListener('click', () => {
         let messageToSend = true;
-        console.log("Hidden button visibility - Gate 2");
+        // console.log("Hidden button visibility - Gate 2");
         
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
             chrome.tabs.sendMessage(tabs[0].id, {message: messageToSend}, function(response) {
-                console.log("Hidden button visibility - Message sent from popup script");
+                // console.log("Hidden button visibility - Message sent from popup script");
             });
         });
     });
@@ -272,7 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById('disableTImeout').addEventListener('change', (event) => {
     const disabled = event.target.checked;
     chrome.storage.local.set({ 'disableTimeout': disabled }, () => {
-        console.log('disableTimeout set to', disabled);
+        // console.log('disableTimeout set to', disabled);
         
         // Send message to content script to toggle timeout immediately
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -280,7 +280,7 @@ document.getElementById('disableTImeout').addEventListener('change', (event) => 
                 type: "toggleTimeout",
                 disabled: disabled
             }, function(response) {
-                console.log("Timeout toggle message sent to content script");
+                // console.log("Timeout toggle message sent to content script");
             });
         });
     });
