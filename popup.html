@@ -11,31 +11,15 @@
         <div id="saveRootContainer">
             <h1 id="extensionName">Resetter</h1>
 
-            <input type="text" id="userInputField" placeholder="Enter Redirect URL">
+            <!-- <h3 id="homepageHeader">Homepage URL</h3> -->
+            <input type="text" id="homeUrlField" placeholder="Enter Home URL">
             <br>
             <button id="removeButton">Remove</button>
             <button id="saveButton">Save</button>
             
             <p id="inputStatus"></p>
-            <p id="homepage">Stored Redirect URL: <span id="storedHomepage"></span></p>
+            <p id="homepage">Stored Home URL: <span id="storedHomeUrl"></span></p>
         </div>
-
-        
-        <div id="homepageExclusionContainerBackground">
-            <div id="homepageExclusionContainer">
-                <h3>Homepage Exclusion</h3>
-                <p>Enter a URL to not run timeout on:</p>
-                <input type="text" id="homepageUrlField" placeholder="Enter Homepage URL (where timeout won't run)">
-                <br>
-                <button id="removeHomepageButton">Remove</button>
-                <button id="saveHomepageButton">Save</button>
-                
-                <p id="homepageInputStatus"></p>
-                <p id="homepageDisplay">Homepage URL: <span id="storedHomepageUrl"></span></p>
-            </div>
-        </div>
-
-
 
         
         <div id="hiddenDisableContainer">
@@ -56,6 +40,12 @@
             <div id="modalButtons">
                 <h3 id="modalHeader">Modal Button Styling</h3>
 
+                <div id="cornerRadiusContainer">
+                    <input type="range" id="cornerRadius" name="roundness" min="0" max="50" />
+                    <label for="roundness">Button roundness</label>
+                    <span id="radiusDisplay">0px</span>
+                </div>
+
                 <ul>
                     <li class="colorPickers">
                         <label for="continueButtonBgColor">Continue Button Background:</label>
@@ -75,12 +65,6 @@
                     </li>
                     <button id="saveButtonStyling">Save Button Colors</button>
                 </ul>
-                
-                <div id="cornerRadiusContainer">
-                    <input type="range" id="cornerRadius" name="roundness" min="0" max="50" />
-                    <label for="roundness">Button roundness</label>
-                    <span id="radiusDisplay">0px</span>
-                </div>
             </div>
         </div>
     </div>

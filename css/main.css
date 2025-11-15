@@ -47,9 +47,9 @@ body {
 
 
 /* Sizing for 4k monitors */
-div#timerWrapper93451 {
+/* div#timerWrapper93451 {
     zoom: 3;
-}
+} */
 
 /*==============================================
 Popup html styles
@@ -58,7 +58,6 @@ Popup html styles
     height: auto;
     width: 450px;
     margin: 0 auto;
-    /* padding: 15px 30px; */
     background-color: #3B3B3B;
     max-height: 800px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
@@ -69,13 +68,23 @@ Popup html styles
     font-family: 'Poppins-Black', Sans-Serif;
     font-size: 28px;
     text-transform: uppercase;
+    margin: 5px auto;
+    display: table;
+}
+
+input#homeUrlField {
     margin: 0 auto;
     display: table;
+    width: 200px;
 }
 
 #saveRootContainer {
     margin: 0 auto;
     display: table;
+}
+
+#homepageHeader {
+    color: #ffffff;
 }
 
 #userInputField {
@@ -103,7 +112,9 @@ Popup html styles
     margin-top: 0;
 }
 
-#storedHomepage { color: #FFB400; }
+#storedHomepage span { color: #FFB400; }
+
+span#storedHomeUrl { color: #FFB400; }
 
 #hiddenDisableContainer, #saveRootContainer {
     padding: 15px 30px;
@@ -159,7 +170,6 @@ Home page dont run
 #storedHomepageUrl { color: #FFB400; }
 
 
-
 /*============  Buttons  ==============*/
 
 #homepageExclusionContainerBackground {
@@ -167,11 +177,13 @@ Home page dont run
     padding: 15px 30px;
 }
 
-::placeholder {
-    color:#ffffff;
-    font-family: 'Poppins-Light', Sans-Serif;
-    opacity: .4; /* Firefox */
-  }
+/* Chrome, Safari, Edge */
+input::placeholder {
+  color: #000000;
+  font-family: 'Poppins-Light', sans-serif;
+  opacity: .6;
+  padding: 2px;
+}
 
 #saveButton, #removeButton, #saveHomepageButton, #removeHomepageButton {
     width: 72px;
@@ -230,7 +242,7 @@ Home page dont run
 
 /*============  Timeout duration  ==============*/
 #timeoutDurationContainer {
-    margin: 5px auto 25px auto;
+    margin: 5px auto;
     display: table;
 }
 
@@ -296,7 +308,7 @@ Home page dont run
 
 /*============  Corner radius styling  ==============*/
 #cornerRadiusContainer {
-    margin: 30px auto 0 auto;
+    margin: 10px auto;
     display: table;
 }
 

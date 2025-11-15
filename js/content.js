@@ -1,41 +1,33 @@
 // console.log("Content script loaded");
 
 ////////////////////////////////////////////////////////////////////////////
-// Hidden reload button 
+// Hidden reload button
 ////////////////////////////////////////////////////////////////////////////
 const hiddenResetButton = document.createElement("div");
 hiddenResetButton.setAttribute("id", "reload93451");
 document.body.append(hiddenResetButton);
 
-
-
 ////////////////////////////////////////////////////////////////////////////
-// HListen for changes on the popup
+// Listen for changes from popup
 ////////////////////////////////////////////////////////////////////////////
 chrome.runtime.onMessage.addListener(function(request) {
     if (request.message) {
         const makeVisible = document.getElementById('reload93451');
         makeVisible.classList.toggle('isVisible');
-        // console.log('Reveal!');
     }
-
     if (request.type === "toggleTimeout") {
         handleTimeoutToggle(request.disabled);
     }
-
     if (request.type === "updateButtonStyling") {
         updateButtonStyling(request.styling);
     }
-
     if (request.type === "updateCornerRadius") {
         updateButtonCornerRadius(request.cornerRadius);
     }
-
     if (request.type === "updateTimeoutDuration") {
         updateTimeoutDuration(request.timeoutDuration);
     }
-
-    if (request.type === "checkHomepageStatus") {
+    if (request.type === "checkHomeStatus") {
         checkAndUpdateTimeoutStatus();
     }
 });
@@ -59,61 +51,69 @@ function startURLMonitoring() {
         }
     }, 250);
 }
+
 startURLMonitoring();
 
 ////////////////////////////////////////////////////////////////////////////
-// Homepage check
+// Home URL Check (single URL for both redirect and exclusion)
 ////////////////////////////////////////////////////////////////////////////
-function isCurrentPageHomepage(storedHomepage) {
-    if (!storedHomepage) return false;
 
+function isCurrentPageHome(homeUrl) {
+    if (!homeUrl) return false;
+    
     const currentUrl = window.location.href;
-    const homepageUrl = storedHomepage.trim();
-
-    // console.log("=== EXACT URL COMPARISON ===");
+    const trimmedHome = homeUrl.trim();
+    
+    // console.log("=== HOME URL COMPARISON ===");
     // console.log("Current URL:", currentUrl);
-    // console.log("Homepage URL:", homepageUrl);
-    // console.log("Identical?", currentUrl === homepageUrl);
+    // console.log("Home URL:", trimmedHome);
+    // console.log("Match?", currentUrl === trimmedHome);
     // console.log("===========================");
-
-    return currentUrl === homepageUrl; // strict match
+    
+    return currentUrl === trimmedHome;
 }
 
 function checkAndUpdateTimeoutStatus() {
-    chrome.storage.local.get(['homepageUrl', 'disableTimeout'], (result) => {
-        const storedHomepage = result.homepageUrl;
+    chrome.storage.local.get(['homeUrl', 'disableTimeout'], (result) => {
+        const homeUrl = result.homeUrl;
         const globalDisable = result.disableTimeout === true;
 
+        // If globally disabled, turn off timeout
         if (globalDisable) {
             handleTimeoutToggle(true);
             return;
         }
 
-        if (storedHomepage && isCurrentPageHomepage(storedHomepage)) {
-            // console.log("Current page IS homepage → disable timeout");
+        // If current page is the home URL, disable timeout
+        if (homeUrl && isCurrentPageHome(homeUrl)) {
+            // console.log("Current page IS home → disable timeout");
             handleTimeoutToggle(true);
         } else {
-            // console.log("Current page is NOT homepage → enable timeout");
+            // console.log("Current page is NOT home → enable timeout");
             handleTimeoutToggle(false);
         }
     });
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// Reload or redirect
+// Reload or redirect to home URL
 ////////////////////////////////////////////////////////////////////////////
 function reloadPageOrRedirect() {
-    chrome.storage.local.get(["userInput"], (result) => {
-        let userInput = result.userInput;
-
-        if (userInput && userInput.trim() !== '') {
-            let finalUrl = userInput.trim();
+    chrome.storage.local.get(["homeUrl"], (result) => {
+        let homeUrl = result.homeUrl;
+        
+        if (homeUrl && homeUrl.trim() !== '') {
+            let finalUrl = homeUrl.trim();
+            
+            // Add https:// if no protocol specified
             if (!finalUrl.match(/^https?:\/\//i)) {
                 finalUrl = 'https://' + finalUrl;
             }
-            // console.log("Redirecting to:", finalUrl);
+            
+            // console.log("Redirecting to home:", finalUrl);
             window.location.href = finalUrl;
         } else {
+            // No home URL set, just reload current page
             // console.log("Reloading current page");
             window.location.reload(true);
         }
@@ -157,38 +157,41 @@ imgEyes.src = chrome.runtime.getURL('img/eyes.gif');
 timeoutModal.appendChild(imgEyes);
 timeoutModal.appendChild(copy);
 timeoutModal.appendChild(continueButton);
-timeoutModal.appendChild(restartButton); 
+timeoutModal.appendChild(restartButton);
 timeoutModal.appendChild(timer993451);
 document.body.appendChild(timeoutModal);
 document.body.appendChild(modalBackground);
 
 restartButton.addEventListener('click', (event) => {
-    event.stopPropagation(); 
+    event.stopPropagation();
     reloadPageOrRedirect();
 });
 
 continueButton.addEventListener('click', (event) => {
     event.stopPropagation();
-
+    
     // Hide modal
     timeoutModal.style.display = 'none';
     modalBackground.style.display = 'none';
     timer993451.style.display = 'none';
     continueButton.style.display = 'none';
     restartButton.style.display = 'none';
-
+    
     // Reset timers
     clearInterval(intervalId);
     clearTimeout(timeoutID);
-
+    
     if (!timeoutDisabled) {
-        startTimer();  // start a fresh timeout
+        startTimer();
     }
     // console.log("Continue clicked → timer reset");
 });
 
-// If an event happens reset timer
+////////////////////////////////////////////////////////////////////////////
+// Event listeners for timer reset
+////////////////////////////////////////////////////////////////////////////
 let eventListenersAdded = false;
+
 function setup() {
     if (!eventListenersAdded) {
         ["click","mousedown","keypress","DOMMouseScroll","mousewheel","touchmove","MSPointerMove"]
@@ -197,7 +200,6 @@ function setup() {
     }
     startTimer();
 }
-
 
 ////////////////////////////////////////////////////////////////////////////
 // Button styles
@@ -215,7 +217,7 @@ function updateButtonCornerRadius(radiusValue) {
 }
 
 function updateTimeoutDuration(durationSeconds) {
-    timeOutTotalTime = durationSeconds * 1000; 
+    timeOutTotalTime = durationSeconds * 1000;
     if (!timeoutDisabled) {
         clearTimeout(timeoutID);
         startTimer();
@@ -224,10 +226,10 @@ function updateTimeoutDuration(durationSeconds) {
 
 function handleTimeoutToggle(disabled) {
     timeoutDisabled = disabled;
+    
     if (disabled) {
         clearTimeout(timeoutID);
         clearInterval(intervalId);
-
         timeoutModal.style.display = 'none';
         modalBackground.style.display = 'none';
         timer993451.style.display = 'none';
@@ -239,16 +241,17 @@ function handleTimeoutToggle(disabled) {
 }
 
 ////////////////////////////////////////////////////////////////////////////
-// Chrome storage for buttons
+// Chrome storage initialization
 ////////////////////////////////////////////////////////////////////////////
-chrome.storage.local.get(['disableTimeout', 'buttonStyling', 'cornerRadius', 'timeoutDuration', 'homepageUrl'], (result) => {
+chrome.storage.local.get(['disableTimeout', 'buttonStyling', 'cornerRadius', 'timeoutDuration', 'homeUrl'], (result) => {
     const globalDisabled = result.disableTimeout === true;
-    const storedHomepage = result.homepageUrl;
-
-    const onHomepage = storedHomepage && isCurrentPageHomepage(storedHomepage);
-    timeoutDisabled = globalDisabled || onHomepage;
-
-    // Defaul button styles
+    const homeUrl = result.homeUrl;
+    const onHomePage = homeUrl && isCurrentPageHome(homeUrl);
+    
+    // Disable timeout if globally disabled OR if on home page
+    timeoutDisabled = globalDisabled || onHomePage;
+    
+    // Default button styles
     const styling = result.buttonStyling || {
         continueBgColor: '#09a49a',
         continueTextColor: '#ffffff',
@@ -256,16 +259,14 @@ chrome.storage.local.get(['disableTimeout', 'buttonStyling', 'cornerRadius', 'ti
         restartTextColor: '#ffffff'
     };
     updateButtonStyling(styling);
-
+    
     updateButtonCornerRadius(result.cornerRadius || 0);
-
+    
     const savedDuration = result.timeoutDuration || 60;
-    timeOutTotalTime = savedDuration * 1000; 
-
+    timeOutTotalTime = savedDuration * 1000;
+    
     if (!timeoutDisabled) setup();
 });
-
-
 
 ////////////////////////////////////////////////////////////////////////////
 // Reset timer and modal
@@ -276,47 +277,43 @@ function startTimer() {
 }
 
 function resetTimer(event) {
-    if (event && event.target.id === 'restart993451') return; 
-
+    if (event && event.target.id === 'restart993451') return;
+    
     // Hide modal + elements
     timeoutModal.style.display = 'none';
     modalBackground.style.display = 'none';
     timer993451.style.display = 'none';
     continueButton.style.display = 'none';
     restartButton.style.display = 'none';
-
+    
     clearInterval(intervalId);
     clearTimeout(timeoutID);
-
+    
     if (!timeoutDisabled) startTimer();
 }
 
 function goInactive() {
     if (timeoutDisabled) return;
-
-    // Show modal immediately (not in interval)
+    
+    // Show modal immediately
     timeoutModal.style.display = 'block';
     modalBackground.style.display = 'block';
     timer993451.style.display = 'inline-block';
     continueButton.style.display = 'inline-block';
     restartButton.style.display = 'inline-block';
-
+    
     timeLeft = 10;
     timer993451.innerHTML = String(timeLeft);
-
+    
     intervalId = setInterval(() => {
         timeLeft--;
         timer993451.innerHTML = String(timeLeft);
-
+        
         if (timeLeft <= 0) {
             clearInterval(intervalId);
-            intervalId = null;  // Important: clear the reference
+            intervalId = null;
             reloadPageOrRedirect();
             return;
         }
     }, 1000);
 }
-
-
-
-
